@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //TODO: Llamar otro activity
                 Intent vistaCategoria;
-                vistaCategoria = new Intent(MainActivity.this, VistaCategoria.class);
+                vistaCategoria = new Intent(MainActivity.this, CategoriaActivity.class);
 
                 vistaCategoria.putExtra("nombre","Juan de los Palotes");
                 startActivity(vistaCategoria);
