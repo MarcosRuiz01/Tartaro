@@ -2,9 +2,11 @@ package ado.edu.itla.tartaro.repositorio.db;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ado.edu.itla.tartaro.entidad.Categoria;
@@ -24,7 +26,7 @@ public class CategoriaRepositorioDBImp implements CategoriaRepositorio {
     public boolean guardar(Categoria categoria) {
 
         ContentValues cv = new ContentValues();
-        cv.put("nombre", categoria.getNombre() );
+        cv.put(CAMPO_NOMBRE, categoria.getNombre() );
 
         SQLiteDatabase db = conexionDb.getWritableDatabase();
         Long id = db.insert(TABLA_NOMBRE, null, cv);
@@ -33,9 +35,10 @@ public class CategoriaRepositorioDBImp implements CategoriaRepositorio {
         if(id.intValue()>0){
             categoria.setId(id.intValue());
             return true;
-        }
+        }else {
 
-        return false;
+            return false;
+        }
     }
 
     @Override
@@ -44,7 +47,30 @@ public class CategoriaRepositorioDBImp implements CategoriaRepositorio {
     }
 
     @Override
-    public List<Categoria> buscar(String buscar) {
-        return null;
+    public List<Categoria> buscar(String buscar){
+
+        List<Categoria> categorias  = new ArrayList<>();
+
+        SQLiteDatabase db = conexionDb.getReadableDatabase();
+
+        String columnas[] = {"id", CAMPO_NOMBRE};
+
+        Cursor cr = db.query(TABLA_NOMBRE, columnas, null, null,null,null,null,null);
+
+        cr.moveToFirst();
+
+        while (!cr.isAfterLast()){
+            int id= cr.getInt(cr.getColumnIndex("id"));
+           String nombre = cr.getString(cr.getColumnIndex(CAMPO_NOMBRE));
+
+           Categoria cat = new Categoria(id,nombre);
+           categorias.add(cat);
+
+           cr.moveToNext();
+        }
+        cr.close();
+        db.close();
+
+        return categorias;
     }
 }

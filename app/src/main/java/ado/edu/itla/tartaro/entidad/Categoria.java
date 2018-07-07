@@ -6,6 +6,17 @@ public class Categoria
     Integer id;
     String nombre;
 
+    public Categoria(){
+
+
+    }
+
+    public Categoria(int id, String nombre){
+        this.id = id;
+        this.nombre = nombre;
+
+    }
+
     public Integer getId() {
         return id;
     }
@@ -31,4 +42,4 @@ public class Categoria
         return sb.toString();
     }
 }
-}
+
