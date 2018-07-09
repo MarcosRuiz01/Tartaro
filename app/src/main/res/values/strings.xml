@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">Tartaro</string>
+    <string name="register"><u>Registrar</u></string>
+    <string name="user">Usuario</string>
+    <string name="pass">Contrasenia</string>
+    <string name="BtnIniciar">Iniciar</string>
+    <string name="mailReg">Email</string>
+    <string name="nameReg">Nombre</string>
+    <string name="passReg">Contrasenia</string>
+    <string name="confPassReg">Confirmar Contrasenia</string>
+    <string name="TipoUsuarios">Tipos de Usuarios</string>
+    <string name="Rbtn1">TECNICO</string>
+    <string name="Rbtn2">NORMAL</string>
+    <string name="BtnRegCan">Cancelar</string>
+    <string name="BtnReg">Registrar</string>
+
 </resources>
