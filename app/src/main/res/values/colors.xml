@@ -2,5 +2,9 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#ff40c9</color>
+    <color name="BtnPendientes">#ff9d5c</color>
+    <color name="BtnProceso">#6fec84</color>
+    <color name="BtnBusqueda">#a2a2a2</color>
+    <color name="LetrasRegistro">#002fff</color>
 </resources>

@@ -11,7 +11,8 @@ public class Categoria
 
     }
 
-    public Categoria(int id, String nombre){
+    public Categoria(int id, String nombre,String fecha, String descripcion, String creador, String categoria,
+                     String estado){
         this.id = id;
         this.nombre = nombre;
 
@@ -32,6 +33,7 @@ public class Categoria
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
 
     @Override
     public String toString() {

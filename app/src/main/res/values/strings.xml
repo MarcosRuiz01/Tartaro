@@ -13,5 +13,8 @@
     <string name="Rbtn2">NORMAL</string>
     <string name="BtnRegCan">Cancelar</string>
     <string name="BtnReg">Registrar</string>
+    <string name="BtnPendientes">Pendientes</string>
+    <string name="BtnProceso">Proceso</string>
+    <string name="BtnBusqueda">Busqueda</string>
 
 </resources>
