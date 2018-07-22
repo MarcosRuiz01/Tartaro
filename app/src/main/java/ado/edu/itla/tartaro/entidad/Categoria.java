@@ -11,8 +11,7 @@ public class Categoria
 
     }
 
-    public Categoria(int id, String nombre,String fecha, String descripcion, String creador, String categoria,
-                     String estado){
+    public Categoria(int id, String nombre){
         this.id = id;
         this.nombre = nombre;
 

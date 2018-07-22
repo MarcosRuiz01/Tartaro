@@ -10,7 +10,7 @@ import ado.edu.itla.tartaro.entidad.Categoria;
 import ado.edu.itla.tartaro.repositorio.CategoriaRepositorio;
 import ado.edu.itla.tartaro.repositorio.db.CategoriaRepositorioDBImp;
 
-public class CategoriaListaActivity extends AppCompatActivity {
+public class ListaTareaActivity extends AppCompatActivity {
 
     private CategoriaRepositorio categoriaRepo;
 

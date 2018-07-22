@@ -17,20 +17,44 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Log.i(LOG_TAG, "Estoy por aquí");
 
-        Button btnCategoria=findViewById(R.id.btnCategoria);
-        btnCategoria.setOnClickListener(new View.OnClickListener(){
+        //Boton Categoria
+
+        Button btnCategoria = findViewById(R.id.btnCategoria);
+        btnCategoria.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                //TODO: Llamar otro activity
                 Intent vistaCategoria;
                 vistaCategoria = new Intent(MainActivity.this, CategoriaActivity.class);
-
-                vistaCategoria.putExtra("nombre","Juan de los Palotes");
                 startActivity(vistaCategoria);
-
 
             }
         });
+
+        Button btnRegistroGeneral = findViewById(R.id.btnRegistroActivity);
+        btnRegistroGeneral.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                System.out.println("Aquiiii. Registro");
+                Intent RegistroGeneral = new Intent(MainActivity.this, RegistroGeneral.class);
+                startActivity(RegistroGeneral);
+            }
+        });
+
+        Button btnLogIn = findViewById(R.id.btn_LogIn);
+        btnLogIn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                System.out.println("Aquiiii. LogIn");
+                Intent LogIn = new Intent(MainActivity.this, LogInGeneral.class);
+                startActivity(LogIn);
+
+            }
+        });
+
+
     }
+
 }

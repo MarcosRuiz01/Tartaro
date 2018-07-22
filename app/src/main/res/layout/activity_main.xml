@@ -20,4 +20,16 @@
         android:layout_height="wrap_content"
         android:text="Categoria" />
 
+    <Button
+        android:id="@+id/btnRegistroActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Registro" />
+
+    <Button
+        android:id="@+id/btn_LogIn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="LogIn" />
+
 </LinearLayout>

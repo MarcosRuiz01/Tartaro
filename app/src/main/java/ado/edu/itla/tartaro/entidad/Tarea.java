@@ -2,7 +2,7 @@ package ado.edu.itla.tartaro.entidad;
 
 import java.util.Date;
 
-public class Tareas {
+public class Tarea {
 
 
     public enum EstadoTarea {
@@ -17,8 +17,8 @@ public class Tareas {
     private String descripcion;
     private EstadoTarea estadoTarea;
     private Categoria categoria;
-    private Usuarios usuarioCreador;
-    private Usuarios usuarioAsignado;
+    private Usuario usuarioCreador;
+    private Usuario usuarioAsignado;
     private Date fechaCompletado;
 
     public Integer getId() {
@@ -69,19 +69,19 @@ public class Tareas {
         this.categoria = categoria;
     }
 
-    public Usuarios getUsuarioCreador() {
+    public Usuario getUsuarioCreador() {
         return usuarioCreador;
     }
 
-    public void setUsuarioCreador(Usuarios usuarioCreador) {
+    public void setUsuarioCreador(Usuario usuarioCreador) {
         this.usuarioCreador = usuarioCreador;
     }
 
-    public Usuarios getUsuarioAsignado() {
+    public Usuario getUsuarioAsignado() {
         return usuarioAsignado;
     }
 
-    public void setUsuarioAsignado(Usuarios usuarioAsignado) {
+    public void setUsuarioAsignado(Usuario usuarioAsignado) {
         this.usuarioAsignado = usuarioAsignado;
     }
 

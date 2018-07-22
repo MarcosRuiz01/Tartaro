@@ -17,8 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".CategoriaActivity" />
-        <activity android:name=".newActivity.CategoriaListaActivity" />
-        <activity android:name=".CategoriaListaActivity" />
+        <activity android:name=".RegistroGeneral" />
+        <activity android:name=".ListaTareaActivity" />
         <activity android:name=".LogInGeneral"></activity>
     </application>
 

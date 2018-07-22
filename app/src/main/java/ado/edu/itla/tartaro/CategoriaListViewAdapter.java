@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import ado.edu.itla.tartaro.entidad.Categoria;
@@ -44,19 +43,11 @@ public class CategoriaListViewAdapter extends BaseAdapter {
                 convertView = LayoutInflater.from(context).inflate(R.layout.item_principal_tecnico, null);
 
             }
-            TextView nombre = convertView.findViewById(R.id.txt_tarea);
-            TextView fecha = convertView.findViewById(R.id.txt_fecha);
-            TextView desc = convertView.findViewById(R.id.txt_descripcion);
-            TextView creador = convertView.findViewById(R.id.txt_creador);
-            TextView categoria = convertView.findViewById(R.id.txt_categoria);
-            TextView estado = convertView.findViewById(R.id.txt_estado);
+            TextView nombre = convertView.findViewById(R.id.txt_UserName);
+
 
             nombre.setText(item.getNombre());
-            fecha.setText(item.getFecha());
-            desc.setText(item.getDescripcion());
-            creador.setText(item.getCreador());
-            categoria.setText(item.getCategoria());
-            estado.setText(item.getEstado());
+
 
             return convertView;
         }
