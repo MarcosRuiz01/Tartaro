@@ -133,7 +133,6 @@
         android:layout_marginRight="48dp"
         android:layout_marginTop="16dp"
         android:background="@android:color/darker_gray"
-        android:onClick="Registro"
         android:text="@string/BtnReg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
