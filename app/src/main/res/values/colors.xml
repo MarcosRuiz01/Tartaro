@@ -7,4 +7,5 @@
     <color name="BtnProceso">#6fec84</color>
     <color name="BtnBusqueda">#a2a2a2</color>
     <color name="LetrasRegistro">#002fff</color>
+    <color name="BtnCrear">#ffffff</color>
 </resources>

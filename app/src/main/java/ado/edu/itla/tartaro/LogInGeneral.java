@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import ado.edu.itla.tartaro.entidad.Usuario;
 import ado.edu.itla.tartaro.repositorio.db.UsuarioRepositorioDBImp;
+import ado.edu.itla.tartaro.usuarioNormal.ListaTareaUNActivity;
+import ado.edu.itla.tartaro.usuarioTecnico.ListaTareaTECActivity;
 
 public class LogInGeneral extends AppCompatActivity {
 
@@ -52,14 +54,15 @@ public class LogInGeneral extends AppCompatActivity {
             switch (user.getTipoUsuario()){
 
                 case NORMAL:
-                    //TODO: LLamar UsuarioNormalActivity
-
+                    System.out.println("Aquiiii. NormalActivity");
+                    Intent NormalActivity = new Intent(LogInGeneral.this, ListaTareaUNActivity.class);
+                    startActivity(NormalActivity);
 
                     break;
                 case TECNICO:
 
                     System.out.println("Aquiiii. TecnicoActivity");
-                    Intent TecnicoActivity = new Intent(LogInGeneral.this, ListaTareaActivity.class);
+                    Intent TecnicoActivity = new Intent(LogInGeneral.this, ListaTareaTECActivity.class);
                     startActivity(TecnicoActivity);
 
             }

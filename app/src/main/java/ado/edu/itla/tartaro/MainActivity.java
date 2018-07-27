@@ -7,6 +7,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import ado.edu.itla.tartaro.usuarioNormal.ListaTareaUNActivity;
+import ado.edu.itla.tartaro.usuarioTecnico.ListaTareaTECActivity;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = "MainActivity";
@@ -50,6 +53,30 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println("Aquiiii. LogIn");
                 Intent LogIn = new Intent(MainActivity.this, LogInGeneral.class);
                 startActivity(LogIn);
+
+            }
+        });
+
+        final Button btnLTUN = findViewById(R.id.btnLTUN);
+        btnLTUN.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                System.out.println("Aquiiii. Lista Tarea Usuario Normal");
+                Intent LTUN = new Intent(MainActivity.this, ListaTareaUNActivity.class);
+                startActivity(LTUN);
+
+            }
+        });
+
+        Button btnLTUT = findViewById(R.id.btnLTUT);
+        btnLTUT.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                System.out.println("Aquiiii. Lista Tarea Usuario Tecnico");
+                Intent LTUT = new Intent(MainActivity.this, ListaTareaTECActivity.class);
+                startActivity(LTUT);
 
             }
         });

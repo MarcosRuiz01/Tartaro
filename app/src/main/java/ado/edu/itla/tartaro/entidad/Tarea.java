@@ -92,4 +92,21 @@ public class Tarea {
     public void setFechaCompletado(Date fechaCompletado) {
         this.fechaCompletado = fechaCompletado;
     }
+
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Usuario{");
+        sb.append("id=").append(id);
+        sb.append(", nombre='").append(nombre);
+        sb.append(", fecha='").append(fecha);
+        sb.append(", descripcion='").append(descripcion);
+        sb.append(", estado_tarea='").append(estadoTarea);
+        sb.append(", categoria='").append(categoria);
+        sb.append(", usuario_creador='").append(usuarioCreador);
+        sb.append(", usuario_asignado='").append(usuarioAsignado);
+        sb.append(", fecha_completado='").append(fechaCompletado).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }

@@ -15,12 +15,14 @@ import ado.edu.itla.tartaro.entidad.Usuario;
 import ado.edu.itla.tartaro.repositorio.UsuarioRepositorio;
 import ado.edu.itla.tartaro.repositorio.db.UsuarioRepositorioDBImp;
 
+import static ado.edu.itla.tartaro.entidad.Usuario.*;
+
 public class RegistroGeneral extends AppCompatActivity {
 
     private EditText email, userName, passw, confPassw;
     private RadioButton rbtTecnico, rbtNormal;
     UsuarioRepositorio userRepo;
-    Usuario.TipoUsuario tipoUsuario;
+    TipoUsuario tipoUsuario;
 
 
     @Override
@@ -36,7 +38,7 @@ public class RegistroGeneral extends AppCompatActivity {
         confPassw = findViewById(R.id.txt_conf_pass);
         rbtTecnico = findViewById(R.id.rbt_tecnico);
         rbtNormal = findViewById(R.id.rbt_normal);
-        rbtNormal.isChecked();
+
 
 
         Button btnRegistrarUsuario = findViewById(R.id.btn_registrar);
@@ -44,10 +46,10 @@ public class RegistroGeneral extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Usuario user = new Usuario();
-                user.setNombre(userName.getText().toString());
-                user.setEmail(email.getText().toString());
-                user.setPassword(passw.getText().toString());
+                Usuario usuario = new Usuario();
+                usuario.setNombre(userName.getText().toString());
+                usuario.setEmail(email.getText().toString());
+                usuario.setPassword(passw.getText().toString());
 
                 String nombreUser = userName.getText().toString();
                 String emailUser = email.getText().toString();
@@ -61,28 +63,24 @@ public class RegistroGeneral extends AppCompatActivity {
 
                 if (p1.equals(p2)) {
 
-                    if (rbtNormal.isChecked()==true) {
-                        tipoUsuario = Usuario.TipoUsuario.NORMAL;
+                    if (rbtTecnico.isChecked()==true) {
 
-                        Log.i("REGISTRO USER NORMAL", user.toString());
+                        tipoUsuario = TipoUsuario.TECNICO;
+                        usuario.setTipoUsuario(tipoUsuario);
+                        Log.i("REGISTRO USER NORMAL", usuario.toString());
                         Toast.makeText(RegistroGeneral.this, "Registro TECNICO exitoso", Toast.LENGTH_SHORT).show();
 
-//                        startActivity(LogIn);
+                    } else {
 
-                    } else if (rbtTecnico.isChecked()==true) {
-                        tipoUsuario = Usuario.TipoUsuario.TECNICO;
-
-                        Log.i("REGISTRO USER TECNICO", user.toString());
+                        tipoUsuario = TipoUsuario.NORMAL;
+                        usuario.setTipoUsuario(tipoUsuario);
+                        Log.i("REGISTRO USER TECNICO", usuario.toString());
                         Toast.makeText(RegistroGeneral.this, "Registro NORMAL exitoso", Toast.LENGTH_SHORT).show();
 
-//                        startActivity(LogIn);
-
-                    } else {
-                        Toast.makeText(RegistroGeneral.this, "Debes elegir un Tipo de Usuario", Toast.LENGTH_SHORT).show();
                     }
 
-                    userRepo.guardar(user);
-                    Log.i("Registro user exitoso", user.toString());
+                    userRepo.guardar(usuario);
+                    startActivity(LogIn);
 
 
                 } else {

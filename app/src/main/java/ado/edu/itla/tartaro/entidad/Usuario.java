@@ -16,13 +16,15 @@ public class Usuario {
 
 
     public Usuario() {
-    }
+
+       }
 
     public Usuario(int id, String nombre, String email, String password, TipoUsuario tipoUsuario) {
         this.id = id;
         this.nombre = nombre;
         this.email = email;
         this.password = password;
+        this.tipoUsuario = tipoUsuario;
     }
 
     public Integer getId() {
@@ -73,7 +75,7 @@ public class Usuario {
         sb.append(", nombre='").append(nombre);
         sb.append(", email='").append(email);
         sb.append(", password='").append(password);
-        sb.append(", tipoUsuario='").append(TipoUsuario.valueOf(null)).append('\'');
+        sb.append(", tipousuario='").append(TipoUsuario.valueOf(tipoUsuario.name())).append('\'');
         sb.append('}');
         return sb.toString();
     }

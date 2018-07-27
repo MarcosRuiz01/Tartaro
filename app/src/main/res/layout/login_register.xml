@@ -110,6 +110,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/Rbtn2"
+            android:checked="true"
             android:textStyle="bold" />
     </RadioGroup>
 

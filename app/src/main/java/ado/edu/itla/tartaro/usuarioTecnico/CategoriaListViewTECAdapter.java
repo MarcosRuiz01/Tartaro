@@ -1,4 +1,4 @@
-package ado.edu.itla.tartaro;
+package ado.edu.itla.tartaro.usuarioTecnico;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,16 +9,18 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import ado.edu.itla.tartaro.R;
 import ado.edu.itla.tartaro.entidad.Categoria;
 
-public class CategoriaListViewAdapter extends BaseAdapter {
+public class CategoriaListViewTECAdapter extends BaseAdapter {
 
     private Context context;
     private List<Categoria> listItems;
 
-    public CategoriaListViewAdapter(Context context, List<Categoria> listItems) {
+    public CategoriaListViewTECAdapter(Context context, List<Categoria> listItems) {
         this.context = context;
         this.listItems = listItems;
+
     }
 
         @Override

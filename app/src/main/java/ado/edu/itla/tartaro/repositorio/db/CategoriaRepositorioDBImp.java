@@ -43,7 +43,30 @@ public class CategoriaRepositorioDBImp implements CategoriaRepositorio {
 
     @Override
     public Categoria buscar(int id) {
-        return null;
+
+        Categoria categoria = null;
+
+        SQLiteDatabase db = conexionDb.getReadableDatabase();
+
+        String columnas[] = {"id", CAMPO_NOMBRE};
+
+        Cursor cr = db.query(TABLA_NOMBRE, columnas, null, null,null,null,null,null);
+
+        cr.moveToFirst();
+
+        while (!cr.isAfterLast()){
+            id = cr.getInt(cr.getColumnIndex("id"));
+            String nombre = cr.getString(cr.getColumnIndex(CAMPO_NOMBRE));
+
+            Categoria cat = new Categoria();
+            cat.setNombre(nombre);
+            cat.setId(id);
+
+        }
+        cr.close();
+        db.close();
+
+        return categoria;
     }
 
     @Override
@@ -64,6 +87,8 @@ public class CategoriaRepositorioDBImp implements CategoriaRepositorio {
            String nombre = cr.getString(cr.getColumnIndex(CAMPO_NOMBRE));
 
            Categoria cat = new Categoria();
+           cat.setId(id);
+           cat.setNombre(nombre);
            categorias.add(cat);
 
            cr.moveToNext();
