@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import ado.edu.itla.tartaro.MainActivity;
 import ado.edu.itla.tartaro.entidad.Tarea;
 import ado.edu.itla.tartaro.entidad.Usuario;
 import ado.edu.itla.tartaro.repositorio.TareaRepositorio;
@@ -20,8 +19,8 @@ public class TareaRepositorioDBImp implements TareaRepositorio {
     private static final String TABLA_NOMBRE= "Tarea";
     private static final String CAMPO_NOMBRE= "nombre";
     private static final String CAMPO_DESCRIPCION= "descripcion";
-    private static final String CAMPO_USUARIO_CREADOR= "usuario_creador";
-    private static final String CAMPO_USUARIO_ASIGNADO= "usuario_asignado";
+    private static final String CAMPO_USUARIO_CREADOR= "usuario_creador_id";
+    private static final String CAMPO_USUARIO_ASIGNADO= "usuario_asignado_id";
     private static final String CAMPO_ESTADO= "estado";
     private static final String CAMPO_CATEGORIA_ID= "categoria_id";
     private static final String CAMPO_FECHA= "fecha";
@@ -41,8 +40,7 @@ public class TareaRepositorioDBImp implements TareaRepositorio {
         cv.put(CAMPO_USUARIO_CREADOR, String.valueOf(tarea.getUsuarioCreador()));
         cv.put(CAMPO_USUARIO_ASIGNADO, String.valueOf(tarea.getUsuarioAsignado()));
         cv.put(CAMPO_ESTADO, tarea.getEstadoTarea().name());
-        cv.put(CAMPO_FECHA, String.valueOf(tarea.getFecha()));
-        cv.put(CAMPO_FECHA_COMPLETADO, String.valueOf(tarea.getFechaCompletado()));
+        cv.put(CAMPO_FECHA, tarea.getFecha().getTime());
 
 
         SQLiteDatabase db = conexionDb.getWritableDatabase();
@@ -59,8 +57,45 @@ public class TareaRepositorioDBImp implements TareaRepositorio {
     }
 
     @Override
-    public Tarea buscar(String nombre) {
-        return null;
+    public Tarea buscar(String task) {
+
+        Tarea tarea = null;
+
+        SQLiteDatabase db = conexionDb.getReadableDatabase();
+
+        String columnas[] = {CAMPO_NOMBRE, CAMPO_DESCRIPCION, CAMPO_ESTADO, CAMPO_FECHA,
+                CAMPO_USUARIO_CREADOR, CAMPO_USUARIO_ASIGNADO, CAMPO_FECHA_COMPLETADO, CAMPO_CATEGORIA_ID};
+
+        Cursor cr = db.query(TABLA_NOMBRE, columnas, "email = ?" , new String[]{task},null,null,null,null);
+
+        cr.moveToFirst();
+
+        if (!cr.isAfterLast()){
+
+            String nombre = cr.getString(cr.getColumnIndex(CAMPO_NOMBRE));
+            String descripcion = cr.getString(cr.getColumnIndex(CAMPO_DESCRIPCION));
+            String estado = cr.getString(cr.getColumnIndex(CAMPO_ESTADO));
+            Long fecha = cr.getLong(cr.getColumnIndex(CAMPO_FECHA));
+            Long fechaCompletado = cr.getLong(cr.getColumnIndex(CAMPO_FECHA_COMPLETADO));
+
+            tarea = new Tarea();
+            tarea.setNombre(nombre);
+            tarea.setDescripcion(descripcion);
+            tarea.setEstadoTarea(Tarea.EstadoTarea.valueOf(estado));
+            tarea.setFecha(new Date(fecha));
+            if(fechaCompletado!=null){
+
+                tarea.setFechaCompletado(new Date(fechaCompletado));
+            }
+
+
+
+        }
+        cr.close();
+        db.close();
+
+
+        return tarea;
     }
 
     @Override
@@ -75,9 +110,11 @@ public class TareaRepositorioDBImp implements TareaRepositorio {
 
         SQLiteDatabase db = conexionDb.getReadableDatabase();
 
-        String columnas[] = {CAMPO_NOMBRE, CAMPO_DESCRIPCION, CAMPO_ESTADO, CAMPO_FECHA, CAMPO_USUARIO_CREADOR, CAMPO_USUARIO_ASIGNADO, CAMPO_FECHA_COMPLETADO, CAMPO_CATEGORIA_ID};
+        String columnas[] = {CAMPO_NOMBRE, CAMPO_DESCRIPCION, CAMPO_ESTADO, CAMPO_FECHA,
+                CAMPO_USUARIO_CREADOR, CAMPO_USUARIO_ASIGNADO, CAMPO_FECHA_COMPLETADO, CAMPO_CATEGORIA_ID};
 
-        Cursor cr = db.query(TABLA_NOMBRE, columnas, null, null,null,null,null,null);
+        Cursor cr = db.rawQuery(EstructuraDb.BUSQUEDA_ENTRE_TAREA_USUARIO_C,new String []{usuario.getId().toString()} );
+
 
         cr.moveToFirst();
 
@@ -86,31 +123,84 @@ public class TareaRepositorioDBImp implements TareaRepositorio {
             String nombre = cr.getString(cr.getColumnIndex(CAMPO_NOMBRE));
             String descripcion = cr.getString(cr.getColumnIndex(CAMPO_DESCRIPCION));
             String estado = cr.getString(cr.getColumnIndex(CAMPO_ESTADO));
-            String fecha = cr.getString(cr.getColumnIndex(CAMPO_FECHA));
-            String usuario_creador = cr.getString(cr.getColumnIndex(CAMPO_USUARIO_CREADOR));
-            String usuario_asignado = cr.getString(cr.getColumnIndex(CAMPO_USUARIO_ASIGNADO));
-            String fecha_completado = cr.getString(cr.getColumnIndex(CAMPO_FECHA_COMPLETADO));
+            Long fecha = cr.getLong(cr.getColumnIndex(CAMPO_FECHA));
+            Integer usuarioCreadorID = cr.getInt(cr.getColumnIndex(CAMPO_USUARIO_CREADOR));
+            String usuarioCreadorNombre = cr.getString(cr.getColumnIndex("usuario_creador"));
+            Long fechaCompletado = cr.getLong(cr.getColumnIndex(CAMPO_FECHA_COMPLETADO));
+            Usuario uc = new Usuario();
+
+            uc.setId(usuarioCreadorID);
+            uc.setNombre(usuarioCreadorNombre);
 
             Tarea tarea = new Tarea();
             tarea.setNombre(nombre);
             tarea.setDescripcion(descripcion);
             tarea.setEstadoTarea(Tarea.EstadoTarea.valueOf(estado));
             tarea.setFecha(new Date(fecha));
-//            tarea.setUsuarioCreador();
-//            tarea.setUsuarioAsignado();
-//            tarea.setFechaCompletado(new Date(fecha_completado));
-//            tareas.add(tarea);
+            tarea.setUsuarioCreador(uc);
+            tarea.setUsuarioAsignado(usuario);
+
+            if(fechaCompletado!=null){
+
+                tarea.setFechaCompletado(new Date(fechaCompletado));
+            }
+            tareas.add(tarea);
 
             cr.moveToNext();
         }
         cr.close();
         db.close();
 
-        return null;
+        return tareas;
     }
 
     @Override
     public List<Tarea> buscarCreadaPor(Usuario usuario) {
-        return null;
+
+
+        List<Tarea> tareas = new ArrayList<>();
+
+        SQLiteDatabase db = conexionDb.getReadableDatabase();
+
+        String columnas[] = {CAMPO_NOMBRE, CAMPO_DESCRIPCION, CAMPO_ESTADO, CAMPO_FECHA, CAMPO_USUARIO_CREADOR, CAMPO_USUARIO_ASIGNADO, CAMPO_FECHA_COMPLETADO, CAMPO_CATEGORIA_ID};
+
+        Cursor cr = db.rawQuery(EstructuraDb.BUSQUEDA_ENTRE_TAREA_USUARIO_A,new String []{usuario.getId().toString()} );
+
+
+        cr.moveToFirst();
+
+        while (!cr.isAfterLast()){
+
+            String nombre = cr.getString(cr.getColumnIndex(CAMPO_NOMBRE));
+            String descripcion = cr.getString(cr.getColumnIndex(CAMPO_DESCRIPCION));
+            String estado = cr.getString(cr.getColumnIndex(CAMPO_ESTADO));
+            Long fecha = cr.getLong(cr.getColumnIndex(CAMPO_FECHA));
+            Integer usuarioCreadorID = cr.getInt(cr.getColumnIndex(CAMPO_USUARIO_CREADOR));
+            String usuarioCreadorNombre = cr.getString(cr.getColumnIndex("usuario_creador"));
+            Long fechaCompletado = cr.getLong(cr.getColumnIndex(CAMPO_FECHA_COMPLETADO));
+            Usuario uc = new Usuario();
+
+            uc.setId(usuarioCreadorID);
+            uc.setNombre(usuarioCreadorNombre);
+
+            Tarea tarea = new Tarea();
+            tarea.setNombre(nombre);
+            tarea.setDescripcion(descripcion);
+            tarea.setEstadoTarea(Tarea.EstadoTarea.valueOf(estado));
+            tarea.setFecha(new Date(fecha));
+            tarea.setUsuarioCreador(uc);
+            tarea.setUsuarioAsignado(usuario);
+
+            if(fechaCompletado!=null){
+
+                tarea.setFechaCompletado(new Date(fechaCompletado));
+            }
+            tareas.add(tarea);
+
+            cr.moveToNext();
+        }
+        cr.close();
+        db.close();
+        return tareas;
     }
 }

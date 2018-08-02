@@ -70,13 +70,7 @@ public class Usuario {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("Usuario{");
-        sb.append("id=").append(id);
-        sb.append(", nombre='").append(nombre);
-        sb.append(", email='").append(email);
-        sb.append(", password='").append(password);
-        sb.append(", tipousuario='").append(TipoUsuario.valueOf(tipoUsuario.name())).append('\'');
-        sb.append('}');
-        return sb.toString();
+
+        return nombre;
     }
 }

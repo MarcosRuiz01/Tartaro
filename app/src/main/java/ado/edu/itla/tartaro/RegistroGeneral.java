@@ -63,7 +63,7 @@ public class RegistroGeneral extends AppCompatActivity {
 
                 if (p1.equals(p2)) {
 
-                    if (rbtTecnico.isChecked()==true) {
+                    if (rbtTecnico.isChecked()) {
 
                         tipoUsuario = TipoUsuario.TECNICO;
                         usuario.setTipoUsuario(tipoUsuario);
