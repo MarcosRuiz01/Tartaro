@@ -12,12 +12,12 @@ import java.util.List;
 import ado.edu.itla.tartaro.R;
 import ado.edu.itla.tartaro.entidad.Categoria;
 
-public class CategoriaListViewTECAdapter extends BaseAdapter {
+public class TareaListViewTECAdapter extends BaseAdapter {
 
     private Context context;
     private List<Categoria> listItems;
 
-    public CategoriaListViewTECAdapter(Context context, List<Categoria> listItems) {
+    public TareaListViewTECAdapter(Context context, List<Categoria> listItems) {
         this.context = context;
         this.listItems = listItems;
 
@@ -45,7 +45,7 @@ public class CategoriaListViewTECAdapter extends BaseAdapter {
                 convertView = LayoutInflater.from(context).inflate(R.layout.item_principal_tecnico, null);
 
             }
-            TextView nombre = convertView.findViewById(R.id.txt_UserName);
+            TextView nombre = convertView.findViewById(R.id.txt_tarea);
 
 
             nombre.setText(item.getNombre());

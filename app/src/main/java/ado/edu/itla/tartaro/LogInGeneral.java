@@ -39,33 +39,34 @@ public class LogInGeneral extends AppCompatActivity {
                 Usuario user = userRepo.buscar(userName.getText().toString());
 
 
-                if (user==null){
-                    Toast.makeText(LogInGeneral.this,"Usuario o contraseña incorrectas",Toast.LENGTH_SHORT).show();
+                if (user == null) {
+                    Toast.makeText(LogInGeneral.this, "Usuario o contraseña incorrectas", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                if (!user.getPassword().equals(userPass.getText().toString())){
-                    Toast.makeText(LogInGeneral.this,"Usuario o contrasenia incorrectas",Toast.LENGTH_SHORT).show();
+                if (!user.getPassword().equals(userPass.getText().toString())) {
+                    Toast.makeText(LogInGeneral.this, "Usuario o contrasenia incorrectas", Toast.LENGTH_SHORT).show();
                     return;
-
                 }
 
 
-            switch (user.getTipoUsuario()){
+                // TODO: establecer usuario logeado.
+                AppConfig.getConfig().setUsuario(user);
 
-                case NORMAL:
-                    System.out.println("Aquiiii. NormalActivity");
-                    Intent NormalActivity = new Intent(LogInGeneral.this, ListaTareaUNActivity.class);
-                    startActivity(NormalActivity);
+                switch (user.getTipoUsuario()) {
 
-                    break;
-                case TECNICO:
+                    case NORMAL:
+                        System.out.println("Aquiiii. NormalActivity");
+                        Intent NormalActivity = new Intent(LogInGeneral.this, ListaTareaUNActivity.class);
+                        startActivity(NormalActivity);
 
-                    System.out.println("Aquiiii. TecnicoActivity");
-                    Intent TecnicoActivity = new Intent(LogInGeneral.this, ListaTareaTECActivity.class);
-                    startActivity(TecnicoActivity);
+                        break;
+                    case TECNICO:
 
-            }
+                        System.out.println("Aquiiii. TecnicoActivity");
+                        Intent TecnicoActivity = new Intent(LogInGeneral.this, ListaTareaTECActivity.class);
+                        startActivity(TecnicoActivity);
+                }
 
             }
         });

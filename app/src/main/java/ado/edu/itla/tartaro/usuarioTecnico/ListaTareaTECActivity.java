@@ -8,7 +8,6 @@ import java.util.List;
 
 import ado.edu.itla.tartaro.R;
 import ado.edu.itla.tartaro.entidad.Categoria;
-import ado.edu.itla.tartaro.repositorio.CategoriaRepositorio;
 import ado.edu.itla.tartaro.repositorio.db.CategoriaRepositorioDBImp;
 
 public class ListaTareaTECActivity extends AppCompatActivity {
@@ -23,7 +22,7 @@ public class ListaTareaTECActivity extends AppCompatActivity {
         categoriaRepo = new CategoriaRepositorioDBImp(this);
 
         List<Categoria> categorias = categoriaRepo.buscar(null);
-        CategoriaListViewTECAdapter adapter = new CategoriaListViewTECAdapter(this, categorias);
+        TareaListViewTECAdapter adapter = new TareaListViewTECAdapter(this, categorias);
         ListView lCategoria = findViewById(R.id.txt_listaTareaTec);
         lCategoria.setAdapter(adapter);
     }

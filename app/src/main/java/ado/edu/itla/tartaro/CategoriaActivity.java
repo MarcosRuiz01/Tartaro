@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -37,11 +38,18 @@ public class CategoriaActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Categoria cat = new Categoria();
-                cat.setNombre(txtNombreCategoria.getText().toString());
-                catRepo.guardar(cat);
-                Log.i("GUARDAR", cat.toString());
+                if (txtNombreCategoria.getText().toString().isEmpty()) {
 
+                    Toast.makeText(CategoriaActivity.this, "La categoria no puede estar en blanco", Toast.LENGTH_SHORT).show();
+                } else {
+
+                    Categoria cat = new Categoria();
+                    cat.setNombre(txtNombreCategoria.getText().toString());
+                    catRepo.guardar(cat);
+                    Log.i("GUARDAR", cat.toString());
+                    txtNombreCategoria.setText("");
+                    Toast.makeText(CategoriaActivity.this, "Categoria creada Exitosamente", Toast.LENGTH_SHORT).show();
+                }
             }
 
         });

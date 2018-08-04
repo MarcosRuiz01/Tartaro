@@ -14,13 +14,13 @@ import ado.edu.itla.tartaro.repositorio.UsuarioRepositorio;
 public class UsuarioRepositorioDBImp implements UsuarioRepositorio {
 
     private ConexionDb conexionDb;
-    private static final String TABLA_NOMBRE="usuario";
-    private static final String CAMPO_NOMBRE="nombre";
-    private static final String CAMPO_EMAIL="email";
-    private static final String CAMPO_PASSWORD="password";
-    private static final String TIPO_USUARIO ="tipousuario";
+    private static final String TABLA_NOMBRE = "usuario";
+    private static final String CAMPO_NOMBRE = "nombre";
+    private static final String CAMPO_EMAIL = "email";
+    private static final String CAMPO_PASSWORD = "password";
+    private static final String TIPO_USUARIO = "tipousuario";
 
-    public UsuarioRepositorioDBImp(Context context){
+    public UsuarioRepositorioDBImp(Context context) {
         conexionDb = new ConexionDb(context);
     }
 
@@ -37,10 +37,10 @@ public class UsuarioRepositorioDBImp implements UsuarioRepositorio {
         Long id = db.insert(TABLA_NOMBRE, null, cv);
         db.close();
 
-        if(id.intValue()>0){
+        if (id.intValue() > 0) {
             user.setId(id.intValue());
             return true;
-        }else {
+        } else {
 
             return false;
         }
@@ -53,25 +53,26 @@ public class UsuarioRepositorioDBImp implements UsuarioRepositorio {
 
         SQLiteDatabase db = conexionDb.getReadableDatabase();
 
-        String columnas[] = {CAMPO_NOMBRE, CAMPO_EMAIL, CAMPO_PASSWORD, TIPO_USUARIO};
+        String columnas[] = {"id", CAMPO_NOMBRE, CAMPO_EMAIL, CAMPO_PASSWORD, TIPO_USUARIO};
 
-        Cursor cr = db.query(TABLA_NOMBRE, columnas, "email = ?" , new String[]{username},null,null,null,null);
+        Cursor cr = db.query(TABLA_NOMBRE, columnas, "email = ?", new String[]{username}, null, null, null, null);
 
         cr.moveToFirst();
 
-        if (!cr.isAfterLast()){
+        if (!cr.isAfterLast()) {
 
             String nombre = cr.getString(cr.getColumnIndex(CAMPO_NOMBRE));
+            int id = cr.getInt(cr.getColumnIndex("id"));
             String email = cr.getString(cr.getColumnIndex(CAMPO_EMAIL));
             String password = cr.getString(cr.getColumnIndex(CAMPO_PASSWORD));
             String tipoUsuario = cr.getString(cr.getColumnIndex(TIPO_USUARIO));
 
             user = new Usuario();
+            user.setId(id);
             user.setTipoUsuario(Usuario.TipoUsuario.valueOf(tipoUsuario));
             user.setNombre(nombre);
             user.setEmail(email);
             user.setPassword(password);
-
 
 
         }
@@ -85,28 +86,30 @@ public class UsuarioRepositorioDBImp implements UsuarioRepositorio {
     @Override
     public List<Usuario> buscarTecnicos() {
 
-        List<Usuario> usuarios  = new ArrayList<>();
+        List<Usuario> usuarios = new ArrayList<>();
 
         SQLiteDatabase db = conexionDb.getReadableDatabase();
 
-        String columnas[] = {CAMPO_NOMBRE, CAMPO_EMAIL, CAMPO_PASSWORD, TIPO_USUARIO};
+        String columnas[] = {"id", CAMPO_NOMBRE, CAMPO_EMAIL, CAMPO_PASSWORD, TIPO_USUARIO};
 
-        Cursor cr = db.query(TABLA_NOMBRE, columnas, null, null,null,null,null,null);
+        Cursor cr = db.query(TABLA_NOMBRE, columnas, "tipousuario = ?", new String[]{Usuario.TipoUsuario.TECNICO.name()}, null, null, null, null);
 
         cr.moveToFirst();
 
-        while (!cr.isAfterLast()){
+        while (!cr.isAfterLast()) {
 
+            int id = cr.getInt(cr.getColumnIndex("id"));
             String nombre = cr.getString(cr.getColumnIndex(CAMPO_NOMBRE));
             String email = cr.getString(cr.getColumnIndex(CAMPO_EMAIL));
             String password = cr.getString(cr.getColumnIndex(CAMPO_PASSWORD));
             String tipoUsuario = cr.getString(cr.getColumnIndex(TIPO_USUARIO));
 
-             Usuario user = new Usuario();
-             user.setTipoUsuario(Usuario.TipoUsuario.valueOf(tipoUsuario));
-             user.setNombre(nombre);
-             user.setEmail(email);
-             user.setPassword(password);
+            Usuario user = new Usuario();
+            user.setId(id);
+            user.setTipoUsuario(Usuario.TipoUsuario.valueOf(tipoUsuario));
+            user.setNombre(nombre);
+            user.setEmail(email);
+            user.setPassword(password);
             usuarios.add(user);
 
             cr.moveToNext();

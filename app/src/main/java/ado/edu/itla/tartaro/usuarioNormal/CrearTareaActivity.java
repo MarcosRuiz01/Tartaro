@@ -9,28 +9,34 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import ado.edu.itla.tartaro.AppConfig;
+import ado.edu.itla.tartaro.CategoriaActivity;
+import ado.edu.itla.tartaro.MainActivity;
 import ado.edu.itla.tartaro.R;
 import ado.edu.itla.tartaro.entidad.Categoria;
 import ado.edu.itla.tartaro.entidad.Tarea;
 import ado.edu.itla.tartaro.entidad.Usuario;
+import ado.edu.itla.tartaro.repositorio.TareaRepositorio;
 import ado.edu.itla.tartaro.repositorio.db.CategoriaRepositorioDBImp;
+import ado.edu.itla.tartaro.repositorio.db.TareaRepositorioDBImp;
 import ado.edu.itla.tartaro.repositorio.db.UsuarioRepositorioDBImp;
 
 public class CrearTareaActivity extends AppCompatActivity {
 
     private Spinner listaUsuariosTecnicos;
     private Spinner categoriasTareas;
-    private TextView txtDescripcionTarea;
-    Usuario user;
-    Categoria cat;
-
+    private EditText txtDescripcionTarea;
+    private EditText txtNombreTarea;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,49 +44,46 @@ public class CrearTareaActivity extends AppCompatActivity {
         setContentView(R.layout.crear_tarea);
 
         txtDescripcionTarea = findViewById(R.id.txt_descripcionT);
-        listaUsuariosTecnicos =findViewById(R.id.listaUsuariosTecnicos);
-        categoriasTareas=findViewById(R.id.listaCategoriaTarea);
+        txtNombreTarea = findViewById(R.id.txt_nombreTarea);
+        listaUsuariosTecnicos = findViewById(R.id.listaUsuariosTecnicos);
+        categoriasTareas = findViewById(R.id.listaCategoriaTarea);
 
-        CategoriaRepositorioDBImp catRepo = new CategoriaRepositorioDBImp (this);
+
+        CategoriaRepositorioDBImp catRepo = new CategoriaRepositorioDBImp(this);
         UsuarioRepositorioDBImp userRepo = new UsuarioRepositorioDBImp(this);
+        final TareaRepositorio tareaRepositorio = new TareaRepositorioDBImp(this);
 
         List<Categoria> categorias = catRepo.buscar(null);
         List<Usuario> usuariosTec = userRepo.buscarTecnicos();
-        ArrayAdapter<Categoria> adapterCategoria = new ArrayAdapter(this, android.R.layout.simple_spinner_item, categorias);
-        ArrayAdapter<Usuario> adapteruser = new ArrayAdapter(this, android.R.layout.simple_spinner_item,usuariosTec);
+        ArrayAdapter<Categoria> adapterCategoria = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categorias);
+        ArrayAdapter<Usuario> adapteruser = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, usuariosTec);
 
         listaUsuariosTecnicos.setAdapter(adapteruser);
         categoriasTareas.setAdapter(adapterCategoria);
-
-        user = (Usuario) listaUsuariosTecnicos.getSelectedItem();
-        cat = (Categoria) categoriasTareas.getSelectedItem();
-
-
-//        listaUsuariosTecnicos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                user = (Usuario) parent.getItemAtPosition(position);
-//
-//            }
-//        });
-//
-//        categoriasTareas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                cat = (Categoria) parent.getItemAtPosition(position);
-//            }
-//        });
 
         Button btnCrearTarea = findViewById(R.id.btnGuargarT);
         btnCrearTarea.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Tarea tarea = new Tarea();
-                tarea.setCategoria(cat);
-                tarea.setUsuarioAsignado(user);
-                tarea.setDescripcion(txtDescripcionTarea.toString());
+                Usuario user = (Usuario) listaUsuariosTecnicos.getSelectedItem();
+                Categoria cat = (Categoria) categoriasTareas.getSelectedItem();
 
+                Tarea tarea = new Tarea();
+                tarea.setFecha(new Date());
+                tarea.setCategoria(cat);
+                tarea.setUsuarioCreador(AppConfig.getConfig().getUsuario());
+                tarea.setUsuarioAsignado(user);
+                tarea.setNombre(txtNombreTarea.getText().toString());
+                tarea.setDescripcion(txtDescripcionTarea.getText().toString());
+
+                tareaRepositorio.guardar(tarea);
+
+                if (tarea.getId() != null) {
+                    Toast.makeText(CrearTareaActivity.this, "Tarea creada Exitosamente", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(CrearTareaActivity.this, "Error: Tarea no creada.", Toast.LENGTH_SHORT).show();
+                }
                 finish();
 
             }
@@ -98,7 +101,26 @@ public class CrearTareaActivity extends AppCompatActivity {
 
         });
 
+        Button btnCategoria = findViewById(R.id.btnCrearCategoria);
+        btnCategoria.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Intent vistaCategoria;
+                vistaCategoria = new Intent(CrearTareaActivity.this, CategoriaActivity.class);
+
+                startActivity(vistaCategoria);
+
+            }
+
+
+        });
+
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.i("DATOS", "Retorno");
 
+    }
 }

@@ -15,7 +15,7 @@ public class Tarea {
     private Date fecha;
     private String nombre;
     private String descripcion;
-    private EstadoTarea estadoTarea;
+    private EstadoTarea estadoTarea = EstadoTarea.PENDIENTE;
     private Categoria categoria;
     private Usuario usuarioCreador;
     private Usuario usuarioAsignado;
