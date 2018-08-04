@@ -21,6 +21,7 @@ public class ListaTareaUNActivity extends AppCompatActivity {
 
     private TareaRepositorioDBImp tareaRepo;
 
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lista_tarea_normal);

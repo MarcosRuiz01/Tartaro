@@ -22,6 +22,7 @@
     <string name="JLCategoria">Categoria:</string>
     <string name="JLDescripcion">Descripcion:</string>
     <string name="JLAsignar">Asignar A:</string>
+    <string name="JLAsignado">Asignado A:</string>
     <string name="JLEstado">Estado:</string>
     <string name="JLCreador">Creado Por:</string>
     <string name="BtnListo">LISTO</string>
