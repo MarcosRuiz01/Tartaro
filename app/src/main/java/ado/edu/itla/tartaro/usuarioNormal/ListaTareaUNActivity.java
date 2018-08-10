@@ -48,17 +48,16 @@ public class ListaTareaUNActivity extends AppCompatActivity {
         });
 
 
-
-        listView.setClickable(true);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 Tarea item = (Tarea) parent.getItemAtPosition(position);
-                tareaRepo.buscar(item.getNombre());
+                tareaRepo.buscar(item.getId());
+//                AppConfig.getConfig().setTareaSeleccUsuario(tareaRepo.buscar(position));
 
-                Intent detallesTarea = new Intent(ListaTareaUNActivity.this, DetallesTareaUNActivity.class);
-                detallesTarea.putExtra("DatosItem",listView.getItemAtPosition(position).toString());
+                Intent detallesTarea = new Intent(view.getContext(), DetallesTareaUNActivity.class);
+//                detallesTarea.putExtra("DatosItem",listView.getItemAtPosition(position).toString());
                 startActivity(detallesTarea);
 
 

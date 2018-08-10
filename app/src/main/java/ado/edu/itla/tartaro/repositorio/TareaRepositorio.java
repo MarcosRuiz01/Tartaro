@@ -13,4 +13,5 @@ public interface TareaRepositorio {
     Tarea buscar(int id);
     List<Tarea> buscarAsignadaA (Usuario usuario);
     List<Tarea> buscarCreadaPor (Usuario usuario);
+    List<Tarea> buscarTodas (String buscar);
 }

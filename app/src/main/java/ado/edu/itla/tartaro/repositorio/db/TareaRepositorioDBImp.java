@@ -115,8 +115,9 @@ public class TareaRepositorioDBImp implements TareaRepositorio {
 
         cr.moveToFirst();
 
-        if (!cr.isAfterLast()){
+         while (!cr.isAfterLast()){
 
+             id = cr.getInt(cr.getColumnIndex("id"));
             String nombre = cr.getString(cr.getColumnIndex(CAMPO_NOMBRE));
             String descripcion = cr.getString(cr.getColumnIndex(CAMPO_DESCRIPCION));
             String estado = cr.getString(cr.getColumnIndex(CAMPO_ESTADO));
@@ -124,6 +125,7 @@ public class TareaRepositorioDBImp implements TareaRepositorio {
             Long fechaCompletado = cr.getLong(cr.getColumnIndex(CAMPO_FECHA_COMPLETADO));
 
             tarea = new Tarea();
+            tarea.setId(id);
             tarea.setNombre(nombre);
             tarea.setDescripcion(descripcion);
             tarea.setEstadoTarea(Tarea.EstadoTarea.valueOf(estado));
@@ -156,6 +158,7 @@ public class TareaRepositorioDBImp implements TareaRepositorio {
 
         while (!cr.isAfterLast()){
 
+
             String nombre = cr.getString(cr.getColumnIndex(CAMPO_NOMBRE));
             String descripcion = cr.getString(cr.getColumnIndex(CAMPO_DESCRIPCION));
             String estado = cr.getString(cr.getColumnIndex(CAMPO_ESTADO));
@@ -169,6 +172,7 @@ public class TareaRepositorioDBImp implements TareaRepositorio {
             uc.setNombre(usuarioCreadorNombre);
 
             Tarea tarea = new Tarea();
+
             tarea.setNombre(nombre);
             tarea.setDescripcion(descripcion);
             tarea.setEstadoTarea(Tarea.EstadoTarea.valueOf(estado));
@@ -202,6 +206,7 @@ public class TareaRepositorioDBImp implements TareaRepositorio {
         Log.i("BUSCANDO", "Buscando Tareas2");
         while (cr.moveToNext()){
 
+//            int id = cr.getInt(cr.getColumnIndex("id"));
             String nombre = cr.getString(cr.getColumnIndex(CAMPO_NOMBRE));
             String descripcion = cr.getString(cr.getColumnIndex(CAMPO_DESCRIPCION));
             String estado = cr.getString(cr.getColumnIndex(CAMPO_ESTADO));
@@ -216,6 +221,7 @@ public class TareaRepositorioDBImp implements TareaRepositorio {
             ua.setNombre(usuarioAsignadoNombre);
 
             Tarea tarea = new Tarea();
+//            tarea.setId(id);
             tarea.setNombre(nombre);
             tarea.setDescripcion(descripcion);
             tarea.setEstadoTarea(Tarea.EstadoTarea.valueOf(estado));
@@ -232,5 +238,10 @@ public class TareaRepositorioDBImp implements TareaRepositorio {
         cr.close();
         db.close();
         return tareas;
+    }
+
+    @Override
+    public List<Tarea> buscarTodas(String buscar) {
+        return null;
     }
 }

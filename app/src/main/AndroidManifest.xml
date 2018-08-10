@@ -24,7 +24,9 @@
         <activity android:name=".usuarioNormal.CrearTareaActivity" />
         <activity android:name=".usuarioNormal.ListaTareaUNActivity" />
         <activity android:name=".pruebas.PruebaListVIew" />
-        <activity android:name=".pruebas.PruebaItem"></activity>
+        <activity android:name=".pruebas.PruebaItem"/>
+        <activity android:name=".usuarioNormal.DetallesTareaUNActivity"/>
+
     </application>
 
 </manifest>

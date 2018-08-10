@@ -8,4 +8,5 @@ public class EstructuraDb {
     public static final String TABLA_USUARIO_CATEGORIA= "CREATE TABLE IF NOT EXISTS usuario_categoria ( usuario_id INTEGER NOT NULL, categoria_id INTEGER NOT NULL)";
     public static final String BUSQUEDA_ENTRE_TAREA_USUARIO_C = "SELECT t.*, uc.nombre as usuario_creador FROM tarea t INNER JOIN usuario uc ON t.usuario_creador_id = uc.id WHERE t.usuario_asignado_id = ? ";
     public static final String BUSQUEDA_ENTRE_TAREA_USUARIO_A = "SELECT t.*, ua.nombre as usuario_asignado FROM tarea t INNER JOIN usuario ua ON t.usuario_asignado_id = ua.id WHERE t.usuario_creador_id = ? ";
+    public static final String BUSQUEDA_ENTRE_TAREA_CATEGORIA = "SELECT t.*, cat.id as categoria_id FROM tarea t INNER JOIN categoria cat ON t.categoria_id = cat.id WHERE t.categoria_id = ? ";
 }
