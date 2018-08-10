@@ -44,4 +44,17 @@
         android:layout_height="wrap_content"
         android:text="Lista Tarea U.Tecnico" />
 
+    <Button
+        android:id="@+id/btnDetallesTarea"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Detalles Tarea" />
+
+    <Button
+        android:id="@+id/PruebaListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Prueba ListView" />
+
+
 </LinearLayout>

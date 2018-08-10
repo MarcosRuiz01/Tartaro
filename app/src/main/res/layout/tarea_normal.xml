@@ -18,7 +18,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txtCategoria" />
 
     <TextView
-        android:id="@+id/txtUsuarioCreador2"
+        android:id="@+id/txtEstado"
         android:layout_width="134dp"
         android:layout_height="36dp"
         android:layout_marginLeft="28dp"
@@ -63,7 +63,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txtCategoria" />
 
     <TextView
-        android:id="@+id/txtUsuarioCreador"
+        android:id="@+id/txtUsuarioAsignado"
         android:layout_width="134dp"
         android:layout_height="36dp"
         android:layout_marginLeft="28dp"
@@ -133,4 +133,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnAgregarN"
         app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/txtTaskName"
+        android:layout_width="170dp"
+        android:layout_height="73dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="TextView"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/txtDescripcion"
+        app:layout_constraintStart_toEndOf="@+id/txtUsuarioAsignado"
+        app:layout_constraintTop_toBottomOf="@+id/fechaTarea"
+        app:layout_constraintVertical_bias="0.403" />
 </android.support.constraint.ConstraintLayout>

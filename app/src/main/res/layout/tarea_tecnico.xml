@@ -15,7 +15,7 @@
         android:layout_marginTop="12dp"
         android:text="@string/JLDescripcion"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtUsuarioCreador" />
+        app:layout_constraintTop_toBottomOf="@+id/txtUsuarioAsignado" />
 
     <TextView
         android:id="@+id/txtDescripcion"
@@ -41,7 +41,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txtCategoria" />
 
     <TextView
-        android:id="@+id/txtUsuarioCreador"
+        android:id="@+id/txtUsuarioAsignado"
         android:layout_width="134dp"
         android:layout_height="36dp"
         android:layout_marginLeft="8dp"

@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import ado.edu.itla.tartaro.pruebas.PruebaListVIew;
+import ado.edu.itla.tartaro.usuarioNormal.DetallesTareaUNActivity;
 import ado.edu.itla.tartaro.usuarioNormal.ListaTareaUNActivity;
 import ado.edu.itla.tartaro.usuarioTecnico.ListaTareaTECActivity;
 
@@ -77,6 +79,28 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println("Aquiiii. Lista Tarea Usuario Tecnico");
                 Intent LTUT = new Intent(MainActivity.this, ListaTareaTECActivity.class);
                 startActivity(LTUT);
+
+            }
+        });
+
+        Button btnDetTareas = findViewById(R.id.btnDetallesTarea);
+        btnDetTareas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("Aquiiii. Detalles Tarea");
+                Intent detallesTarea = new Intent(getBaseContext(),DetallesTareaUNActivity.class);
+                startActivity(detallesTarea);
+
+            }
+        });
+
+        Button btnPruebaListView = findViewById(R.id.PruebaListView);
+        btnPruebaListView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("Aquiiii. Prueba List View");
+                Intent listView = new Intent(MainActivity.this, PruebaListVIew.class);
+                startActivity(listView);
 
             }
         });

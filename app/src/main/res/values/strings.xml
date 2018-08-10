@@ -27,5 +27,8 @@
     <string name="JLCreador">Creado Por:</string>
     <string name="BtnListo">LISTO</string>
     <string name="BtnAgregar">Agregar Nota</string>
+    <string name="LPendiente"><![CDATA[<b><fond color=#ff9d5c>PENDIENTE</fond></b>]]></string>
+    <string name="LProceso"><![CDATA[<b><fond color=#ff40c9>PROCESO</fond></b>]]></string>
+    <string name="LListo"><![CDATA[<b><fond color=#6fec84>LISTO</fond></b>]]></string>
 
 </resources>

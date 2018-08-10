@@ -8,4 +8,6 @@
     <color name="BtnBusqueda">#a2a2a2</color>
     <color name="LetrasRegistro">#002fff</color>
     <color name="BtnCrear">#ffffff</color>
+    <color name="FondoTareas">#7e0099ff</color>
+    <color name="FondoIcono">#7e0073ff</color>
 </resources>

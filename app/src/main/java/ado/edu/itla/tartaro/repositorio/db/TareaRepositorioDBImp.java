@@ -103,7 +103,44 @@ public class TareaRepositorioDBImp implements TareaRepositorio {
 
     @Override
     public Tarea buscar(int id) {
-        return null;
+
+        Tarea tarea = null;
+
+        SQLiteDatabase db = conexionDb.getReadableDatabase();
+
+        String columnas[] = {"id",CAMPO_NOMBRE, CAMPO_DESCRIPCION, CAMPO_ESTADO, CAMPO_FECHA,
+                CAMPO_USUARIO_CREADOR, CAMPO_USUARIO_ASIGNADO, CAMPO_FECHA_COMPLETADO, CAMPO_CATEGORIA_ID};
+
+        Cursor cr = db.query(TABLA_NOMBRE, columnas, null , null,null,null,null,null);
+
+        cr.moveToFirst();
+
+        if (!cr.isAfterLast()){
+
+            String nombre = cr.getString(cr.getColumnIndex(CAMPO_NOMBRE));
+            String descripcion = cr.getString(cr.getColumnIndex(CAMPO_DESCRIPCION));
+            String estado = cr.getString(cr.getColumnIndex(CAMPO_ESTADO));
+            Long fecha = cr.getLong(cr.getColumnIndex(CAMPO_FECHA));
+            Long fechaCompletado = cr.getLong(cr.getColumnIndex(CAMPO_FECHA_COMPLETADO));
+
+            tarea = new Tarea();
+            tarea.setNombre(nombre);
+            tarea.setDescripcion(descripcion);
+            tarea.setEstadoTarea(Tarea.EstadoTarea.valueOf(estado));
+            tarea.setFecha(new Date(fecha));
+            if(fechaCompletado!=null){
+
+                tarea.setFechaCompletado(new Date(fechaCompletado));
+            }
+
+
+
+        }
+        cr.close();
+        db.close();
+
+
+        return tarea;
     }
 
     @Override
