@@ -1,6 +1,8 @@
 package ado.edu.itla.tartaro.entidad;
 
-public class Categoria
+import java.io.Serializable;
+
+public class Categoria implements Serializable
 {
 
     Integer id;

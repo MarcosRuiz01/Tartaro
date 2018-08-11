@@ -10,4 +10,7 @@
     <color name="BtnCrear">#ffffff</color>
     <color name="FondoTareas">#7e0099ff</color>
     <color name="FondoIcono">#7e0073ff</color>
+    <color name="PENDIENTE">#ff0000</color>
+    <color name="PROCESO">#fff700</color>
+    <color name="LISTA">#177200</color>
 </resources>

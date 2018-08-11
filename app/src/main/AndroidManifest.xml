@@ -26,6 +26,7 @@
         <activity android:name=".pruebas.PruebaListVIew" />
         <activity android:name=".pruebas.PruebaItem"/>
         <activity android:name=".usuarioNormal.DetallesTareaUNActivity"/>
+        <activity android:name=".usuarioTecnico.DetallesTareaTECActivity"/>
 
     </application>
 

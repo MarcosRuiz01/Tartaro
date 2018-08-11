@@ -11,6 +11,8 @@ public interface TareaRepositorio {
     boolean guardar(Tarea tarea);
     Tarea buscar(String nombre);
     Tarea buscar(int id);
+    Tarea modificarEstado(int id, Tarea tarea);
+    Tarea eliminar (int id);
     List<Tarea> buscarAsignadaA (Usuario usuario);
     List<Tarea> buscarCreadaPor (Usuario usuario);
     List<Tarea> buscarTodas (String buscar);

@@ -15,7 +15,7 @@
         android:layout_marginTop="76dp"
         android:text="@string/JLEstado"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtCategoria" />
+        app:layout_constraintTop_toBottomOf="@+id/txtCategoria2" />
 
     <TextView
         android:id="@+id/txtEstado"
@@ -25,7 +25,7 @@
         android:layout_marginStart="28dp"
         android:layout_marginTop="64dp"
         android:text="TextView"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/jLUsuarioCreador" />
 
@@ -41,7 +41,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txtEstado" />
 
     <TextView
-        android:id="@+id/txtDescripcion"
+        android:id="@+id/txtDescripcion2"
         android:layout_width="350dp"
         android:layout_height="70dp"
         android:layout_marginLeft="8dp"
@@ -61,10 +61,10 @@
         android:layout_marginTop="12dp"
         android:text="@string/JLAsignado"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtCategoria" />
+        app:layout_constraintTop_toBottomOf="@+id/txtCategoria2" />
 
     <TextView
-        android:id="@+id/txtUsuarioAsignado"
+        android:id="@+id/txtUsuarioCreador"
         android:layout_width="134dp"
         android:layout_height="36dp"
         android:layout_marginLeft="28dp"
@@ -86,7 +86,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/txtCategoria"
+        android:id="@+id/txtCategoria2"
         android:layout_width="134dp"
         android:layout_height="39dp"
         android:layout_marginLeft="28dp"
@@ -97,7 +97,7 @@
         app:layout_constraintTop_toBottomOf="@+id/jLCategoria" />
 
     <TextView
-        android:id="@+id/fechaTarea"
+        android:id="@+id/fechaTarea2"
         android:layout_width="108dp"
         android:layout_height="36dp"
         android:layout_marginEnd="8dp"
@@ -118,7 +118,7 @@
         android:layout_marginTop="12dp"
         android:text="@string/BtnAgregar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDescripcion" />
+        app:layout_constraintTop_toBottomOf="@+id/txtDescripcion2" />
 
     <ListView
         android:layout_width="368dp"
@@ -147,8 +147,8 @@
         android:gravity="center"
         android:text="TextView"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/txtDescripcion"
-        app:layout_constraintStart_toEndOf="@+id/txtUsuarioAsignado"
-        app:layout_constraintTop_toBottomOf="@+id/fechaTarea"
+        app:layout_constraintBottom_toTopOf="@+id/txtDescripcion2"
+        app:layout_constraintStart_toEndOf="@+id/txtUsuarioCreador"
+        app:layout_constraintTop_toBottomOf="@+id/fechaTarea2"
         app:layout_constraintVertical_bias="0.403" />
 </android.support.constraint.ConstraintLayout>

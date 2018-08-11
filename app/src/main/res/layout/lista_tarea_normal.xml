@@ -57,6 +57,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:dividerHeight="4dp"
+        android:choiceMode="singleChoice"
         android:footerDividersEnabled="true"
         android:headerDividersEnabled="true"
         android:visibility="visible"

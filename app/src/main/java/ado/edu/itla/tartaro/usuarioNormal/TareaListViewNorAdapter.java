@@ -1,57 +1,53 @@
 package ado.edu.itla.tartaro.usuarioNormal;
 
 import android.content.Context;
-import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
 
 import ado.edu.itla.tartaro.AppConfig;
 import ado.edu.itla.tartaro.R;
-import ado.edu.itla.tartaro.entidad.Categoria;
 import ado.edu.itla.tartaro.entidad.Tarea;
-import ado.edu.itla.tartaro.entidad.Usuario;
 
 public class TareaListViewNorAdapter extends BaseAdapter {
 
+
+    private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
     private Context context;
-    private List<Tarea> listItems;
-    private View tareaSelect;
+    private List<Tarea> tareas;
+
 
     public TareaListViewNorAdapter(Context context, List<Tarea> listItems) {
         this.context = context;
-        this.listItems = listItems;
+        this.tareas = listItems;
 
     }
 
     @Override
     public int getCount() {
-        return listItems.size();
+        return tareas.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return listItems.get(position);
+        return tareas.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        Tarea task = listItems.get(position);
-        return task.getId();
+//        Tarea task = tareas.get(position);
+        return position; //task.getId();
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Tarea item = (Tarea) getItem(position);
+        Tarea tarea = (Tarea) getItem(position);
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.item_principal_tecnico, null);
 
@@ -61,15 +57,26 @@ public class TareaListViewNorAdapter extends BaseAdapter {
         TextView fecha = convertView.findViewById(R.id.txt_fecha);
         TextView categoria = convertView.findViewById(R.id.txt_categoria);
         TextView estado = convertView.findViewById(R.id.txt_estado);
-        TextView creador = convertView.findViewById(R.id.txt_creador);
+        TextView asignadoA = convertView.findViewById(R.id.txt_creador);
 
-        nombre.setText(item.getNombre());
-        descripcion.setText(item.getDescripcion());
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        fecha.setText(sdf.format(item.getFecha()));
-//        categoria.setText(item.getCategoria().toString());
-        estado.setText("Estado: " + item.getEstadoTarea().name());
-        creador.setText("Creador: " + AppConfig.getConfig().getUsuario().toString());
+        nombre.setText(tarea.getNombre());
+        descripcion.setText(tarea.getDescripcion());
+
+        fecha.setText(SIMPLE_DATE_FORMAT.format(tarea.getFecha()));
+        categoria.setText(tarea.getCategoria().getNombre());
+        estado.setText("Estado: " + tarea.getEstadoTarea().name());
+        switch (tarea.getEstadoTarea()){
+            case EN_PROCESO:
+                estado.setTextColor(ContextCompat.getColor(context, R.color.PROCESO));
+                break;
+            case PENDIENTE:
+                estado.setTextColor(ContextCompat.getColor(context, R.color.PENDIENTE));
+                break;
+            case LISTA:
+                estado.setTextColor(ContextCompat.getColor(context, R.color.LISTA));
+                break;
+        }
+        asignadoA.setText("Asignado A: " + tarea.getUsuarioAsignado());
 
         return convertView;
     }

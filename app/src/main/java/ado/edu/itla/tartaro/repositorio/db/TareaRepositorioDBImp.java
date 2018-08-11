@@ -18,17 +18,17 @@ import ado.edu.itla.tartaro.repositorio.TareaRepositorio;
 public class TareaRepositorioDBImp implements TareaRepositorio {
 
     private ConexionDb conexionDb;
-    private static final String TABLA_NOMBRE= "tarea";
-    private static final String CAMPO_NOMBRE= "nombre";
-    private static final String CAMPO_DESCRIPCION= "descripcion";
-    private static final String CAMPO_USUARIO_CREADOR= "usuario_creador_id";
-    private static final String CAMPO_USUARIO_ASIGNADO= "usuario_asignado_id";
-    private static final String CAMPO_ESTADO= "estado";
-    private static final String CAMPO_CATEGORIA_ID= "categoria_id";
-    private static final String CAMPO_FECHA= "fecha";
-    private static final String CAMPO_FECHA_COMPLETADO= "fecha_completado";
+    private static final String TABLA_NOMBRE = "tarea";
+    private static final String CAMPO_NOMBRE = "nombre";
+    private static final String CAMPO_DESCRIPCION = "descripcion";
+    private static final String CAMPO_USUARIO_CREADOR = "usuario_creador_id";
+    private static final String CAMPO_USUARIO_ASIGNADO = "usuario_asignado_id";
+    private static final String CAMPO_ESTADO = "estado";
+    private static final String CAMPO_CATEGORIA_ID = "categoria_id";
+    private static final String CAMPO_FECHA = "fecha";
+    private static final String CAMPO_FECHA_COMPLETADO = "fecha_completado";
 
-    public TareaRepositorioDBImp (Context context){
+    public TareaRepositorioDBImp(Context context) {
         conexionDb = new ConexionDb(context);
     }
 
@@ -50,13 +50,14 @@ public class TareaRepositorioDBImp implements TareaRepositorio {
         Long id = db.insert(TABLA_NOMBRE, null, cv);
         db.close();
 
-        Log.i("GUARDANDO", id+"");
-        if(id.intValue()>0){
+        Log.i("GUARDANDO", id + "");
+        if (id.intValue() > 0) {
             tarea.setId(id.intValue());
             return true;
-        }else {
+        } else {
             return false;
         }
+
     }
 
     @Override
@@ -69,11 +70,11 @@ public class TareaRepositorioDBImp implements TareaRepositorio {
         String columnas[] = {CAMPO_NOMBRE, CAMPO_DESCRIPCION, CAMPO_ESTADO, CAMPO_FECHA,
                 CAMPO_USUARIO_CREADOR, CAMPO_USUARIO_ASIGNADO, CAMPO_FECHA_COMPLETADO, CAMPO_CATEGORIA_ID};
 
-        Cursor cr = db.query(TABLA_NOMBRE, columnas, "email = ?" , new String[]{task},null,null,null,null);
+        Cursor cr = db.query(TABLA_NOMBRE, columnas, "email = ?", new String[]{task}, null, null, null, null);
 
         cr.moveToFirst();
 
-        if (!cr.isAfterLast()){
+        if (!cr.isAfterLast()) {
 
             String nombre = cr.getString(cr.getColumnIndex(CAMPO_NOMBRE));
             String descripcion = cr.getString(cr.getColumnIndex(CAMPO_DESCRIPCION));
@@ -86,11 +87,10 @@ public class TareaRepositorioDBImp implements TareaRepositorio {
             tarea.setDescripcion(descripcion);
             tarea.setEstadoTarea(Tarea.EstadoTarea.valueOf(estado));
             tarea.setFecha(new Date(fecha));
-            if(fechaCompletado!=null){
+            if (fechaCompletado != null) {
 
                 tarea.setFechaCompletado(new Date(fechaCompletado));
             }
-
 
 
         }
@@ -108,16 +108,16 @@ public class TareaRepositorioDBImp implements TareaRepositorio {
 
         SQLiteDatabase db = conexionDb.getReadableDatabase();
 
-        String columnas[] = {"id",CAMPO_NOMBRE, CAMPO_DESCRIPCION, CAMPO_ESTADO, CAMPO_FECHA,
+        String columnas[] = {"id", CAMPO_NOMBRE, CAMPO_DESCRIPCION, CAMPO_ESTADO, CAMPO_FECHA,
                 CAMPO_USUARIO_CREADOR, CAMPO_USUARIO_ASIGNADO, CAMPO_FECHA_COMPLETADO, CAMPO_CATEGORIA_ID};
 
-        Cursor cr = db.query(TABLA_NOMBRE, columnas, null , null,null,null,null,null);
+        Cursor cr = db.query(TABLA_NOMBRE, columnas, null, null, null, null, null, null);
 
         cr.moveToFirst();
 
-         while (!cr.isAfterLast()){
+        while (!cr.isAfterLast()) {
 
-             id = cr.getInt(cr.getColumnIndex("id"));
+            id = cr.getInt(cr.getColumnIndex("id"));
             String nombre = cr.getString(cr.getColumnIndex(CAMPO_NOMBRE));
             String descripcion = cr.getString(cr.getColumnIndex(CAMPO_DESCRIPCION));
             String estado = cr.getString(cr.getColumnIndex(CAMPO_ESTADO));
@@ -130,11 +130,10 @@ public class TareaRepositorioDBImp implements TareaRepositorio {
             tarea.setDescripcion(descripcion);
             tarea.setEstadoTarea(Tarea.EstadoTarea.valueOf(estado));
             tarea.setFecha(new Date(fecha));
-            if(fechaCompletado!=null){
+            if (fechaCompletado != null) {
 
                 tarea.setFechaCompletado(new Date(fechaCompletado));
             }
-
 
 
         }
@@ -146,33 +145,53 @@ public class TareaRepositorioDBImp implements TareaRepositorio {
     }
 
     @Override
+    public Tarea modificarEstado(int id, Tarea tarea) {
+        ContentValues cv = new ContentValues();
+        cv.put(CAMPO_ESTADO, tarea.getEstadoTarea().name());
+        SQLiteDatabase db = conexionDb.getWritableDatabase();
+        db.update(TABLA_NOMBRE,cv,"id ="+id,null);
+        db.close();
+
+        return null;
+    }
+
+    @Override
+    public Tarea eliminar(int id) {
+        return null;
+    }
+
+    @Override
     public List<Tarea> buscarAsignadaA(Usuario usuario) {
 
+        Log.i("BUSCANDO", "Buscando Tareas");
         List<Tarea> tareas = new ArrayList<>();
 
         SQLiteDatabase db = conexionDb.getReadableDatabase();
-        Cursor cr = db.rawQuery(EstructuraDb.BUSQUEDA_ENTRE_TAREA_USUARIO_C,new String []{usuario.getId().toString()} );
+        Cursor cr = db.rawQuery(EstructuraDb.BUSQUEDA_ENTRE_TAREA_USUARIO_C, new String[]{usuario.getId().toString()});
 
+        Log.i("BUSCANDO", "Buscando Tareas2");
+        while (cr.moveToNext()) {
 
-        cr.moveToFirst();
-
-        while (!cr.isAfterLast()){
-
-
+            int id = cr.getInt(cr.getColumnIndex("id"));
+            int catId = cr.getInt(cr.getColumnIndex("categoria_id"));
             String nombre = cr.getString(cr.getColumnIndex(CAMPO_NOMBRE));
             String descripcion = cr.getString(cr.getColumnIndex(CAMPO_DESCRIPCION));
             String estado = cr.getString(cr.getColumnIndex(CAMPO_ESTADO));
             Long fecha = cr.getLong(cr.getColumnIndex(CAMPO_FECHA));
-            Integer usuarioCreadorID = cr.getInt(cr.getColumnIndex(CAMPO_USUARIO_CREADOR));
+            Integer usuarioCreadorId = cr.getInt(cr.getColumnIndex(CAMPO_USUARIO_CREADOR));
             String usuarioCreadorNombre = cr.getString(cr.getColumnIndex("usuario_creador"));
+            String categoriaName = cr.getString(cr.getColumnIndex("cat_nombre"));
             Long fechaCompletado = cr.getLong(cr.getColumnIndex(CAMPO_FECHA_COMPLETADO));
-            Usuario uc = new Usuario();
 
-            uc.setId(usuarioCreadorID);
+            Log.i("BUSCANDO", nombre);
+            Usuario uc = new Usuario();
+            uc.setId(usuarioCreadorId);
             uc.setNombre(usuarioCreadorNombre);
 
+            Categoria cat = new Categoria(catId, categoriaName);
             Tarea tarea = new Tarea();
-
+            tarea.setCategoria(cat);
+            tarea.setId(id);
             tarea.setNombre(nombre);
             tarea.setDescripcion(descripcion);
             tarea.setEstadoTarea(Tarea.EstadoTarea.valueOf(estado));
@@ -180,17 +199,14 @@ public class TareaRepositorioDBImp implements TareaRepositorio {
             tarea.setUsuarioCreador(uc);
             tarea.setUsuarioAsignado(usuario);
 
-            if(fechaCompletado!=null){
+            if (fechaCompletado != null) {
 
                 tarea.setFechaCompletado(new Date(fechaCompletado));
             }
             tareas.add(tarea);
-
-            cr.moveToNext();
         }
         cr.close();
         db.close();
-
         return tareas;
     }
 
@@ -201,35 +217,39 @@ public class TareaRepositorioDBImp implements TareaRepositorio {
         List<Tarea> tareas = new ArrayList<>();
 
         SQLiteDatabase db = conexionDb.getReadableDatabase();
-        Cursor cr = db.rawQuery(EstructuraDb.BUSQUEDA_ENTRE_TAREA_USUARIO_A,new String []{usuario.getId().toString()} );
+        Cursor cr = db.rawQuery(EstructuraDb.BUSQUEDA_ENTRE_TAREA_USUARIO_A, new String[]{usuario.getId().toString()});
 
         Log.i("BUSCANDO", "Buscando Tareas2");
-        while (cr.moveToNext()){
+        while (cr.moveToNext()) {
 
-//            int id = cr.getInt(cr.getColumnIndex("id"));
+            int id = cr.getInt(cr.getColumnIndex("id"));
+            int catId = cr.getInt(cr.getColumnIndex("categoria_id"));
             String nombre = cr.getString(cr.getColumnIndex(CAMPO_NOMBRE));
             String descripcion = cr.getString(cr.getColumnIndex(CAMPO_DESCRIPCION));
             String estado = cr.getString(cr.getColumnIndex(CAMPO_ESTADO));
             Long fecha = cr.getLong(cr.getColumnIndex(CAMPO_FECHA));
             Integer usuarioAsignadoId = cr.getInt(cr.getColumnIndex(CAMPO_USUARIO_ASIGNADO));
             String usuarioAsignadoNombre = cr.getString(cr.getColumnIndex("usuario_asignado"));
-           Long fechaCompletado = cr.getLong(cr.getColumnIndex(CAMPO_FECHA_COMPLETADO));
+            String categoriaName = cr.getString(cr.getColumnIndex("cat_nombre"));
+            Long fechaCompletado = cr.getLong(cr.getColumnIndex(CAMPO_FECHA_COMPLETADO));
 
             Log.i("BUSCANDO", nombre);
             Usuario ua = new Usuario();
             ua.setId(usuarioAsignadoId);
             ua.setNombre(usuarioAsignadoNombre);
 
+            Categoria cat = new Categoria(catId, categoriaName);
             Tarea tarea = new Tarea();
-//            tarea.setId(id);
+            tarea.setCategoria(cat);
+            tarea.setId(id);
             tarea.setNombre(nombre);
             tarea.setDescripcion(descripcion);
             tarea.setEstadoTarea(Tarea.EstadoTarea.valueOf(estado));
             tarea.setFecha(new Date(fecha));
-            tarea.setUsuarioCreador(ua);
-            tarea.setUsuarioAsignado(usuario);
+            tarea.setUsuarioCreador(usuario);
+            tarea.setUsuarioAsignado(ua);
 
-            if(fechaCompletado!=null){
+            if (fechaCompletado != null) {
 
                 tarea.setFechaCompletado(new Date(fechaCompletado));
             }

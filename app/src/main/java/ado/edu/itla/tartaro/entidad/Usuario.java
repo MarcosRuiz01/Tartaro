@@ -1,6 +1,8 @@
 package ado.edu.itla.tartaro.entidad;
 
-public class Usuario {
+import java.io.Serializable;
+
+public class Usuario implements Serializable {
 
 
     public enum TipoUsuario {
