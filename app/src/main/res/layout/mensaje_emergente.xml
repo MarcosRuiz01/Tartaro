@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="340dp"
+    android:layout_height="200dp">
+
+
+    <TextView
+        android:id="@+id/txtDialogMsg"
+        android:layout_width="289dp"
+        android:layout_height="96dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="TextView"
+        android:textColor="#000000"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/btnDialogAceptar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/txtDialogMsg"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/txtDialogMsg"
+        android:layout_marginBottom="17dp"
+        android:text="@string/btnAceptar" />
+
+    <Button
+        android:id="@+id/btnDialogDeclinar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/txtDialogMsg"
+        android:layout_alignTop="@+id/btnDialogAceptar"
+        android:text="@string/btnDeclinar" />
+</RelativeLayout>

@@ -9,7 +9,8 @@ public class Tarea implements Serializable {
     public enum EstadoTarea {
         PENDIENTE,
         EN_PROCESO,
-        LISTA
+        LISTA,
+        ELIMINADA
     }
 
     private Integer id;

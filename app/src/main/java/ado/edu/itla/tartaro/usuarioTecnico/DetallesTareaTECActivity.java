@@ -1,5 +1,6 @@
 package ado.edu.itla.tartaro.usuarioTecnico;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -35,6 +36,12 @@ public class DetallesTareaTECActivity extends AppCompatActivity {
         Button btnEliminar;
         ListView listView;
         final TareaRepositorioDBImp tareaRepo = new TareaRepositorioDBImp(this);
+        final Dialog dialog = new Dialog(DetallesTareaTECActivity.this);
+        dialog.setContentView(R.layout.mensaje_emergente);
+        dialog.setTitle("CONFIRMACION");
+        final TextView dialogMsg = dialog.findViewById(R.id.txtDialogMsg);
+        final Button btnAceptar = dialog.findViewById(R.id.btnDialogAceptar);
+        final Button btnDeclinar = dialog.findViewById(R.id.btnDialogDeclinar);
 
         taskName = findViewById(R.id.txtTaskName2);
         categoria = findViewById(R.id.txtCategoria2);
@@ -58,22 +65,26 @@ public class DetallesTareaTECActivity extends AppCompatActivity {
             usuarioCreador.setText(tarea.getUsuarioCreador().getNombre());
             switch (tarea.getEstadoTarea()) {
                 case EN_PROCESO:
-
+                    estado.setTextColor(ContextCompat.getColor(this, R.color.PROCESO));
                     btnEstado.setText(R.string.TerminarTarea);
                     btnEstado.setBackgroundColor(ContextCompat.getColor(this, R.color.LISTA));
                     break;
                 case PENDIENTE:
-
+                    estado.setTextColor(ContextCompat.getColor(this, R.color.PENDIENTE));
                     btnEstado.setText(R.string.IniciarTarea);
                     btnEstado.setBackgroundColor(ContextCompat.getColor(this, R.color.PROCESO));
                     break;
                 case LISTA:
-
+                    estado.setTextColor(ContextCompat.getColor(this, R.color.LISTA));
                     btnEstado.setClickable(false);
                     btnEstado.setEnabled(false);
                     btnEliminar.setEnabled(true);
                     btnEstado.setText(R.string.BtnListo);
                     break;
+
+                case ELIMINADA:
+                    btnEstado.setEnabled(false);
+                    btnEstado.setText(R.string.BtnListo);
             }
 
 
@@ -82,29 +93,95 @@ public class DetallesTareaTECActivity extends AppCompatActivity {
         btnEstado.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                     if(tarea.getEstadoTarea() !=null){
                         switch (tarea.getEstadoTarea()) {
                             case EN_PROCESO:
-                                tarea.setEstadoTarea(Tarea.EstadoTarea.LISTA);
-                                tareaRepo.modificarEstado(tarea.getId(),tarea);
-                                finish();
-                                startActivity(getIntent());
-                                break;
-                            case PENDIENTE:
-                                tarea.setEstadoTarea(Tarea.EstadoTarea.EN_PROCESO);
-                                tareaRepo.modificarEstado(tarea.getId(),tarea);
-                                finish();
-                                startActivity(getIntent());
-                                break;
-                            case LISTA:
+                                dialog.show();
+                                dialogMsg.setText(R.string.TerminarConfirmacion);
+                                btnAceptar.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        tarea.setEstadoTarea(Tarea.EstadoTarea.LISTA);
+                                        tareaRepo.modificarEstado(tarea.getId(),tarea);
+                                        finish();
+                                        startActivity(getIntent());
+                                    }
+                                });
+
+                                btnDeclinar.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        dialog.dismiss();
+                                    }
+                                });
+
 
                                 break;
+                            case PENDIENTE:
+                                dialog.show();
+                                dialogMsg.setText(R.string.IniciarConfirmacion);
+                                btnAceptar.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        tarea.setEstadoTarea(Tarea.EstadoTarea.EN_PROCESO);
+                                        tareaRepo.modificarEstado(tarea.getId(), tarea);
+                                        finish();
+                                        startActivity(getIntent());
+                                    }
+                                });
+
+                                btnDeclinar.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                                break;
+
                         }
                     }
             }
         });
 
-    //TODO: Hacer boton Eliminar TArea
+        btnEliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(tarea.getEstadoTarea() !=null) {
+                    switch (tarea.getEstadoTarea()) {
+
+                        case LISTA:
+                            dialog.show();
+                            dialogMsg.setText(R.string.EliminarConfirmacion);
+                            btnAceptar.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    tarea.setEstadoTarea(Tarea.EstadoTarea.ELIMINADA);
+                                    tareaRepo.modificarEstado(tarea.getId(),tarea);
+                                    finish();
+                                    startActivity(getIntent());
+                                }
+                            });
+
+                            btnDeclinar.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.dismiss();
+                                }
+                            });
+                            break;
+
+                        case ELIMINADA:
+                            break;
+
+                    }
+
+                    }
+                }
+        });
+
+    //TODO: Hacer boton Eliminar Tarea
 
     }
 

@@ -2,6 +2,7 @@ package ado.edu.itla.tartaro.usuarioNormal;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
@@ -26,7 +27,6 @@ public class DetallesTareaUNActivity extends AppCompatActivity {
         setContentView(R.layout.tarea_normal);
 
 
-
         taskName = findViewById(R.id.txtTaskName);
         categoria = findViewById(R.id.txtCategoria2);
         fecha = findViewById(R.id.fechaTarea2);
@@ -36,15 +36,27 @@ public class DetallesTareaUNActivity extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        Tarea tarea =  (Tarea) intent.getSerializableExtra(ListaTareaUNActivity.TAREA_SELECCIONADA);
+        Tarea tarea = (Tarea) intent.getSerializableExtra(ListaTareaUNActivity.TAREA_SELECCIONADA);
 
-        if (tarea!=null) {
+        if (tarea != null) {
             taskName.setText(tarea.getNombre());
             descripcion.setText(tarea.getDescripcion());
             categoria.setText(tarea.getCategoria().getNombre());
             fecha.setText(SIMPLE_DATE_FORMAT.format(tarea.getFecha()));
             estado.setText(tarea.getEstadoTarea().name());
             usuarioAsignado.setText(tarea.getUsuarioAsignado().getNombre());
+            switch (tarea.getEstadoTarea()) {
+                case EN_PROCESO:
+                    estado.setTextColor(ContextCompat.getColor(this, R.color.PROCESO));
+                    break;
+                case PENDIENTE:
+                    estado.setTextColor(ContextCompat.getColor(this, R.color.PENDIENTE));
+                    break;
+                case LISTA:
+                    estado.setTextColor(ContextCompat.getColor(this, R.color.LISTA));
+                    break;
+            }
+
         }
 
     }
