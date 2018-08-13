@@ -54,7 +54,7 @@
         android:id="@+id/PruebaListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Prueba ListView" />
+        android:text="Prueba AppBar" />
 
 
 </LinearLayout>

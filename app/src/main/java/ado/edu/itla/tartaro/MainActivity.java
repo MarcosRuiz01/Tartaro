@@ -7,7 +7,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import ado.edu.itla.tartaro.pruebas.PruebaListVIew;
+
+import ado.edu.itla.tartaro.pruebas.pruebaAppBar;
 import ado.edu.itla.tartaro.usuarioNormal.DetallesTareaUNActivity;
 import ado.edu.itla.tartaro.usuarioNormal.ListaTareaUNActivity;
 import ado.edu.itla.tartaro.usuarioTecnico.ListaTareaTECActivity;
@@ -94,13 +95,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button btnPruebaListView = findViewById(R.id.PruebaListView);
-        btnPruebaListView.setOnClickListener(new View.OnClickListener() {
+        Button btnPruebaAppBar = findViewById(R.id.PruebaListView);
+        btnPruebaAppBar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("Aquiiii. Prueba List View");
-                Intent listView = new Intent(MainActivity.this, PruebaListVIew.class);
-                startActivity(listView);
+                System.out.println("Aquiiii. Prueba App Bar");
+                Intent pruebaAppBar = new Intent(MainActivity.this,pruebaAppBar.class);
+                startActivity(pruebaAppBar);
 
             }
         });
