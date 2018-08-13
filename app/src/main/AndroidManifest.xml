@@ -9,23 +9,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"/>
+        <activity android:name=".CategoriaActivity" />
+        <activity android:name=".RegistroGeneral" />
+        <activity android:name=".usuarioTecnico.ListaTareaTECActivity" />
+        <activity android:name=".LogInGeneral">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CategoriaActivity" />
-        <activity android:name=".RegistroGeneral" />
-        <activity android:name=".usuarioTecnico.ListaTareaTECActivity" />
-        <activity android:name=".LogInGeneral" />
         <activity android:name=".usuarioNormal.TareaNormal" />
         <activity android:name=".usuarioNormal.CrearTareaActivity" />
         <activity android:name=".usuarioNormal.ListaTareaUNActivity" />
         <activity android:name=".pruebas.PruebaListVIew" />
         <activity android:name=".pruebas.PruebaItem"/>
         <activity android:name=".usuarioNormal.DetallesTareaUNActivity"/>
+        <activity android:name=".usuarioTecnico.DetallesTareaTECActivity"/>
 
     </application>
 

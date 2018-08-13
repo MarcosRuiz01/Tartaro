@@ -57,6 +57,8 @@ public class CrearTareaActivity extends AppCompatActivity {
         List<Usuario> usuariosTec = userRepo.buscarTecnicos();
         ArrayAdapter<Categoria> adapterCategoria = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categorias);
         ArrayAdapter<Usuario> adapteruser = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, usuariosTec);
+        adapterCategoria.notifyDataSetChanged();
+
 
         listaUsuariosTecnicos.setAdapter(adapteruser);
         categoriasTareas.setAdapter(adapterCategoria);
@@ -72,6 +74,7 @@ public class CrearTareaActivity extends AppCompatActivity {
                 Tarea tarea = new Tarea();
                 tarea.setFecha(new Date());
                 tarea.setCategoria(cat);
+                tarea.setEstadoTarea(Tarea.EstadoTarea.PENDIENTE);
                 tarea.setUsuarioCreador(AppConfig.getConfig().getUsuario());
                 tarea.setUsuarioAsignado(user);
                 tarea.setNombre(txtNombreTarea.getText().toString());

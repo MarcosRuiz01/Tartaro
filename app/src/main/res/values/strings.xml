@@ -11,6 +11,8 @@
     <string name="TipoUsuarios">Tipos de Usuarios</string>
     <string name="Rbtn1">TECNICO</string>
     <string name="Rbtn2">NORMAL</string>
+    <string name="btnAceptar">ACEPTAR</string>
+    <string name="btnDeclinar">DECLINAR</string>
     <string name="BtnRegCan">Cancelar</string>
     <string name="BtnReg">Registrar</string>
     <string name="BtnPendientes">Pendientes</string>
@@ -26,9 +28,14 @@
     <string name="JLEstado">Estado:</string>
     <string name="JLCreador">Creado Por:</string>
     <string name="BtnListo">LISTO</string>
+    <string name="BtnEliminar">ELIMINAR</string>
     <string name="BtnAgregar">Agregar Nota</string>
-    <string name="LPendiente"><![CDATA[<b><fond color=#ff9d5c>PENDIENTE</fond></b>]]></string>
-    <string name="LProceso"><![CDATA[<b><fond color=#ff40c9>PROCESO</fond></b>]]></string>
-    <string name="LListo"><![CDATA[<b><fond color=#6fec84>LISTO</fond></b>]]></string>
+    <string name="IniciarTarea">INICIAR</string>
+    <string name="IniciarConfirmacion">¿Esta seguro que desea INICIAR esta tarea?.</string>
+    <string name="TerminarTarea">TERMINAR</string>
+    <string name="TerminarConfirmacion">¿Esta seguro que desea TERMINAR esta tarea?.</string>
+    <string name="EliminarConfirmacion">¿Esta seguro que desea ELIMINAR esta tarea?.\n
+        OJO! Si Elimina la tarea, el creador de la misma ya no podrá verla. </string>
+    <string name="EliminarTarea"><u>Eliminar Tarea</u></string>
 
 </resources>

@@ -106,6 +106,8 @@ public class RegistroGeneral extends AppCompatActivity {
             }
         });
 
+        //TODO: Hacer una comprobacion con el registro, donde no permita usar un usuario previamente registrado.
+
 
     }
 

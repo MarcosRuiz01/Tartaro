@@ -1,21 +1,23 @@
 package ado.edu.itla.tartaro.entidad;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Tarea {
+public class Tarea implements Serializable {
 
 
     public enum EstadoTarea {
         PENDIENTE,
         EN_PROCESO,
-        LISTA
+        LISTA,
+        ELIMINADA
     }
 
     private Integer id;
     private Date fecha;
     private String nombre;
     private String descripcion;
-    private EstadoTarea estadoTarea = EstadoTarea.PENDIENTE;
+    private EstadoTarea estadoTarea;
     private Categoria categoria;
     private Usuario usuarioCreador;
     private Usuario usuarioAsignado;
