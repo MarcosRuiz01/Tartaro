@@ -13,4 +13,6 @@
     <color name="PENDIENTE">#ff0000</color>
     <color name="PROCESO">#fff700</color>
     <color name="LISTA">#177200</color>
+    <color name="Refresh1">#0471ff</color>
+    <color name="Refresh2">#00ff2f</color>
 </resources>

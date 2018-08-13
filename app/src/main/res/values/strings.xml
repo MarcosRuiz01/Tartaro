@@ -36,5 +36,6 @@
     <string name="TerminarConfirmacion">¿Esta seguro que desea TERMINAR esta tarea?.</string>
     <string name="EliminarConfirmacion">¿Esta seguro que desea ELIMINAR esta tarea?.\n
         OJO! Si Elimina la tarea, el creador de la misma ya no podrá verla. </string>
+    <string name="EliminarTarea"><u>Eliminar Tarea</u></string>
 
 </resources>

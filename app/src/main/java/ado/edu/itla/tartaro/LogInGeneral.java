@@ -50,7 +50,6 @@ public class LogInGeneral extends AppCompatActivity {
                 }
 
 
-                // TODO: establecer usuario logeado.
                 AppConfig.getConfig().setUsuario(user);
 
                 switch (user.getTipoUsuario()) {

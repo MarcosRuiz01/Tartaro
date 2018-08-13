@@ -172,6 +172,8 @@ public class DetallesTareaTECActivity extends AppCompatActivity {
                             });
                             break;
 
+                            //TODO: Decidir si este boton (Eliminar) hara algo mas
+
                         case ELIMINADA:
                             break;
 
@@ -180,8 +182,6 @@ public class DetallesTareaTECActivity extends AppCompatActivity {
                     }
                 }
         });
-
-    //TODO: Hacer boton Eliminar Tarea
 
     }
 

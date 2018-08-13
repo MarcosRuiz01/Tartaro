@@ -81,7 +81,10 @@ public class TareaListViewNorAdapter extends BaseAdapter {
         return convertView;
     }
 
-
+    @Override
+    public void notifyDataSetChanged() {
+        super.notifyDataSetChanged();
+    }
 }
 
 

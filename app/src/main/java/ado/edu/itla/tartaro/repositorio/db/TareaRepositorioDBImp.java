@@ -149,7 +149,7 @@ public class TareaRepositorioDBImp implements TareaRepositorio {
         ContentValues cv = new ContentValues();
         cv.put(CAMPO_ESTADO, tarea.getEstadoTarea().name());
         SQLiteDatabase db = conexionDb.getWritableDatabase();
-        db.update(TABLA_NOMBRE,cv,"id ="+id,null);
+        db.update(TABLA_NOMBRE, cv, "id =" + id, null);
         db.close();
 
         return null;

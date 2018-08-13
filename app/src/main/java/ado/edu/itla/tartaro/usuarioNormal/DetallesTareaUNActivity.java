@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -19,6 +20,7 @@ public class DetallesTareaUNActivity extends AppCompatActivity {
     private TextView usuarioAsignado;
     private TextView estado;
     private TextView descripcion;
+    private TextView eliminarTarea;
     private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
 
 
@@ -58,6 +60,15 @@ public class DetallesTareaUNActivity extends AppCompatActivity {
             }
 
         }
+
+        //TODO: Confirmar la elimimacion de tarea en DB
+        eliminarTarea= findViewById(R.id.textView2);
+        eliminarTarea.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
     }
 
