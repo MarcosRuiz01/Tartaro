@@ -24,7 +24,9 @@
         <activity android:name=".usuarioNormal.CrearTareaActivity" />
         <activity android:name=".usuarioNormal.ListaTareaUNActivity" />
         <activity android:name=".pruebas.pruebaAppBar"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar"
+
+            />
         <activity android:name=".usuarioNormal.DetallesTareaUNActivity"/>
         <activity android:name=".usuarioTecnico.DetallesTareaTECActivity"/>
 

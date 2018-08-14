@@ -1,28 +1,26 @@
 package ado.edu.itla.tartaro.usuarioNormal;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
+import android.widget.Toolbar;
 
 import java.util.List;
 
 import ado.edu.itla.tartaro.AppConfig;
 import ado.edu.itla.tartaro.R;
-import ado.edu.itla.tartaro.entidad.Categoria;
 import ado.edu.itla.tartaro.entidad.Tarea;
-import ado.edu.itla.tartaro.repositorio.db.CategoriaRepositorioDBImp;
 import ado.edu.itla.tartaro.repositorio.db.TareaRepositorioDBImp;
-import ado.edu.itla.tartaro.usuarioTecnico.TareaListViewTECAdapter;
 
 public class ListaTareaUNActivity extends AppCompatActivity {
 
@@ -118,8 +116,6 @@ public class ListaTareaUNActivity extends AppCompatActivity {
 
 
     }
-
-
 
 
 }
