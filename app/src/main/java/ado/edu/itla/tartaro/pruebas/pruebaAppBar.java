@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.Toast;
+import android.support.v7.widget.Toolbar;
 
 import ado.edu.itla.tartaro.R;
 
@@ -16,7 +17,7 @@ public class pruebaAppBar extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.appbar_layout_tecnico);
-        android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar4);
+        Toolbar toolbar = findViewById(R.id.toolbar4);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         SpinnerAdapter adapter1 = ArrayAdapter.createFromResource(this, R.array.Estados_spinner, android.R.layout.simple_spinner_dropdown_item);

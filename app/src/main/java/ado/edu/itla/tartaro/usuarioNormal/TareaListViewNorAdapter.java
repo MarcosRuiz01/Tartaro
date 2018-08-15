@@ -65,7 +65,7 @@ public class TareaListViewNorAdapter extends BaseAdapter {
         fecha.setText(SIMPLE_DATE_FORMAT.format(tarea.getFecha()));
         categoria.setText(tarea.getCategoria().getNombre());
         estado.setText("Estado: " + tarea.getEstadoTarea().name());
-        switch (tarea.getEstadoTarea()){
+        switch (tarea.getEstadoTarea()) {
             case EN_PROCESO:
                 estado.setTextColor(ContextCompat.getColor(context, R.color.PROCESO));
                 break;
@@ -81,10 +81,4 @@ public class TareaListViewNorAdapter extends BaseAdapter {
         return convertView;
     }
 
-    @Override
-    public void notifyDataSetChanged() {
-        super.notifyDataSetChanged();
-    }
 }
-
-

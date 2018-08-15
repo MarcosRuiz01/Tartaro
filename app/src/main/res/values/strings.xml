@@ -38,9 +38,9 @@
         OJO! Si Elimina la tarea, el creador de la misma ya no podrá verla. </string>
     <string name="EliminarTarea"><u>Eliminar Tarea</u></string>
     <string-array name="Estados_spinner">
-        <item><font color ='#ffffff'>Todas</font></item>
+        <item><font color='#ffffff'>Todas</font></item>
         <item><font color='#ffffff'>En Proceso</font></item>
-        <item><font color="#ffffff">Pendientes</font></item>
+        <item><font color='#ffffff'>Pendientes</font></item>
     </string-array>
     <string name="Busqueda">Search</string>
     <string name="Eliminar">Delete</string>

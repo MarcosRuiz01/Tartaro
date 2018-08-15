@@ -4,13 +4,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 
 import ado.edu.itla.tartaro.R;
 import ado.edu.itla.tartaro.entidad.Tarea;
+import ado.edu.itla.tartaro.usuarioTecnico.ListaTareaTECActivity;
 
 public class DetallesTareaUNActivity extends AppCompatActivity {
 
@@ -20,14 +25,17 @@ public class DetallesTareaUNActivity extends AppCompatActivity {
     private TextView usuarioAsignado;
     private TextView estado;
     private TextView descripcion;
-    private TextView eliminarTarea;
+    private TextView taskNameBar;
     private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tarea_normal);
-
+        Toolbar toolbar = findViewById(R.id.toolbar1);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        taskNameBar = findViewById(R.id.task_bar_name);
 
         taskName = findViewById(R.id.txtTaskName);
         categoria = findViewById(R.id.txtCategoria2);
@@ -39,6 +47,8 @@ public class DetallesTareaUNActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Tarea tarea = (Tarea) intent.getSerializableExtra(ListaTareaUNActivity.TAREA_SELECCIONADA);
+        taskNameBar.setText(tarea.getNombre());
+
 
         if (tarea != null) {
             taskName.setText(tarea.getNombre());
@@ -62,14 +72,30 @@ public class DetallesTareaUNActivity extends AppCompatActivity {
         }
 
         //TODO: Confirmar la elimimacion de tarea en DB
-        eliminarTarea= findViewById(R.id.textView2);
-        eliminarTarea.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.manu_detalles_tarea, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.delete_button) {
+            Toast.makeText(DetallesTareaUNActivity.this, "Action clicked", Toast.LENGTH_LONG).show();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

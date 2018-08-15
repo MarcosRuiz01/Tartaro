@@ -18,17 +18,20 @@
         </activity>
         <activity android:name=".CategoriaActivity" />
         <activity android:name=".RegistroGeneral" />
-        <activity android:name=".usuarioTecnico.ListaTareaTECActivity" />
+        <activity android:name=".usuarioTecnico.ListaTareaTECActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".LogInGeneral"/>
         <activity android:name=".usuarioNormal.TareaNormal" />
         <activity android:name=".usuarioNormal.CrearTareaActivity" />
-        <activity android:name=".usuarioNormal.ListaTareaUNActivity" />
+        <activity android:name=".usuarioNormal.ListaTareaUNActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".pruebas.pruebaAppBar"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".usuarioNormal.DetallesTareaUNActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".usuarioTecnico.DetallesTareaTECActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
-            />
-        <activity android:name=".usuarioNormal.DetallesTareaUNActivity"/>
-        <activity android:name=".usuarioTecnico.DetallesTareaTECActivity"/>
 
     </application>
 

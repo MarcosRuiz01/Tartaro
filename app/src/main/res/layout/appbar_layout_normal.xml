@@ -11,8 +11,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar4"
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar5"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:background="?attr/colorPrimary"
@@ -21,10 +21,10 @@
             android:theme="@style/AppTheme.AppBarOverlay"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
-        <Spinner
-            android:id="@+id/spinnerToolBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <Spinner
+                android:id="@+id/spinnerToolBar2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
 
         </android.support.v7.widget.Toolbar>
@@ -41,7 +41,7 @@
 
 
         <include
-            layout="@layout/lista_tarea_tecnico"
+            layout="@layout/lista_tarea_normal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -56,5 +56,12 @@
             app:layout_constraintTop_toTopOf="parent" />
     </android.support.constraint.ConstraintLayout>
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@android:drawable/ic_menu_add" />
 
 </android.support.design.widget.CoordinatorLayout>
