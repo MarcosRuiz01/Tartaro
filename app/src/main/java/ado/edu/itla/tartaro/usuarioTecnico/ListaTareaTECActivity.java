@@ -1,11 +1,14 @@
 package ado.edu.itla.tartaro.usuarioTecnico;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -80,10 +83,33 @@ public class ListaTareaTECActivity extends AppCompatActivity {
         });
 
       }
+    //TODO: Terminar la configuracion del Search
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.manu_listview_tarea, menu);
+        // Associate searchable configuration with the SearchView
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.search_button).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+
+//        final SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                TextView textView=(TextView)findViewById(R.id.aa);
+//                textView.setText(newText);
+//                return true;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                TextView textView=(TextView)findViewById(R.id.aa);
+//                textView.setText(query);
+//                return true;
+//            }
+//        };
+
+//        searchView.setOnQueryTextListener(queryTextListener);
         return true;
     }
 

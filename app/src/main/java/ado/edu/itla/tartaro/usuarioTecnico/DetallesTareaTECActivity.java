@@ -1,13 +1,16 @@
 package ado.edu.itla.tartaro.usuarioTecnico;
 
 import android.app.Dialog;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -30,7 +33,6 @@ public class DetallesTareaTECActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tarea_tecnico);
-        setContentView(R.layout.tarea_normal);
         Toolbar toolbar = findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -66,6 +68,7 @@ public class DetallesTareaTECActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         tarea = (Tarea) intent.getSerializableExtra(ListaTareaTECActivity.TAREA_SELECCIONADA);
+        taskNameBar.setText(tarea.getNombre());
 
 
         if (tarea != null) {
@@ -98,7 +101,7 @@ public class DetallesTareaTECActivity extends AppCompatActivity {
                     btnEstado.setEnabled(false);
                     btnEstado.setText(R.string.BtnListo);
             }
-            taskNameBar.setText(tarea.getNombre());
+
 
         }
 
@@ -169,6 +172,7 @@ public class DetallesTareaTECActivity extends AppCompatActivity {
                             btnAceptar.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
+//                                    tareaRepo.eliminar(tarea.getId());
                                     tarea.setEstadoTarea(Tarea.EstadoTarea.ELIMINADA);
                                     tareaRepo.modificarEstado(tarea.getId(),tarea);
                                     finish();
@@ -183,8 +187,6 @@ public class DetallesTareaTECActivity extends AppCompatActivity {
                                 }
                             });
                             break;
-
-                            //TODO: Decidir si este boton (Eliminar) hara algo mas
 
                         case ELIMINADA:
                             break;
@@ -201,8 +203,11 @@ public class DetallesTareaTECActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.manu_detalles_tarea, menu);
+
+
         return true;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -213,7 +218,7 @@ public class DetallesTareaTECActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.delete_button) {
-            Toast.makeText(DetallesTareaTECActivity.this, "Action clicked", Toast.LENGTH_LONG).show();
+            Toast.makeText(DetallesTareaTECActivity.this, "No tienes permitido dicha acción", Toast.LENGTH_LONG).show();
             return true;
         }
         return super.onOptionsItemSelected(item);

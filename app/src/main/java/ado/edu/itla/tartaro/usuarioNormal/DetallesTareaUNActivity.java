@@ -1,5 +1,6 @@
 package ado.edu.itla.tartaro.usuarioNormal;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -8,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +17,8 @@ import java.text.SimpleDateFormat;
 
 import ado.edu.itla.tartaro.R;
 import ado.edu.itla.tartaro.entidad.Tarea;
+import ado.edu.itla.tartaro.repositorio.db.TareaRepositorioDBImp;
+import ado.edu.itla.tartaro.usuarioTecnico.DetallesTareaTECActivity;
 import ado.edu.itla.tartaro.usuarioTecnico.ListaTareaTECActivity;
 
 public class DetallesTareaUNActivity extends AppCompatActivity {
@@ -26,6 +30,13 @@ public class DetallesTareaUNActivity extends AppCompatActivity {
     private TextView estado;
     private TextView descripcion;
     private TextView taskNameBar;
+    Tarea tarea;
+    TareaRepositorioDBImp tareaRepo;
+    Dialog dialog;
+    TextView dialogMsg;
+    Button btnAceptar;
+    Button btnDeclinar;
+
     private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
 
 
@@ -35,7 +46,15 @@ public class DetallesTareaUNActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar1);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+        dialog = new Dialog(DetallesTareaUNActivity.this);
+        dialog.setContentView(R.layout.mensaje_emergente);
+        dialog.setTitle("CONFIRMACION");
+        dialogMsg = dialog.findViewById(R.id.txtDialogMsg);
         taskNameBar = findViewById(R.id.task_bar_name);
+        btnAceptar = dialog.findViewById(R.id.btnDialogAceptar);
+        btnDeclinar = dialog.findViewById(R.id.btnDialogDeclinar);
+
+        tareaRepo = new TareaRepositorioDBImp(this);
 
         taskName = findViewById(R.id.txtTaskName);
         categoria = findViewById(R.id.txtCategoria2);
@@ -46,7 +65,7 @@ public class DetallesTareaUNActivity extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        Tarea tarea = (Tarea) intent.getSerializableExtra(ListaTareaUNActivity.TAREA_SELECCIONADA);
+        tarea = (Tarea) intent.getSerializableExtra(ListaTareaUNActivity.TAREA_SELECCIONADA);
         taskNameBar.setText(tarea.getNombre());
 
 
@@ -71,9 +90,6 @@ public class DetallesTareaUNActivity extends AppCompatActivity {
 
         }
 
-        //TODO: Confirmar la elimimacion de tarea en DB
-
-
     }
 
     @Override
@@ -92,7 +108,27 @@ public class DetallesTareaUNActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.delete_button) {
-            Toast.makeText(DetallesTareaUNActivity.this, "Action clicked", Toast.LENGTH_LONG).show();
+            Toast.makeText(DetallesTareaUNActivity.this, "Eliminar Tarea", Toast.LENGTH_LONG).show();
+            dialog.show();
+            dialogMsg.setText(R.string.TerminarConfirmacion);
+            btnAceptar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    tareaRepo.eliminar(tarea.getId());
+//                    tarea.setEstadoTarea(Tarea.EstadoTarea.ELIMINADA);
+//                    tareaRepo.modificarEstado(tarea.getId(),tarea);
+                    finish();
+                    startActivity(getIntent());
+                }
+            });
+
+            btnDeclinar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+
             return true;
         }
         return super.onOptionsItemSelected(item);

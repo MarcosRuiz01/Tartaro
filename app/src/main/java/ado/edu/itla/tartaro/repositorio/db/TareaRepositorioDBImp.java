@@ -157,6 +157,9 @@ public class TareaRepositorioDBImp implements TareaRepositorio {
 
     @Override
     public Tarea eliminar(int id) {
+        SQLiteDatabase db = conexionDb.getWritableDatabase();
+        db.delete(TABLA_NOMBRE, "id ="+id,null );
+
         return null;
     }
 

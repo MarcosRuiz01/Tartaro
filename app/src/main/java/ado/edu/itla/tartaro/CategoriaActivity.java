@@ -1,5 +1,6 @@
 package ado.edu.itla.tartaro;
 
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.NotificationBuilderWithBuilderAccessor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -57,14 +58,15 @@ public class CategoriaActivity extends AppCompatActivity {
         btnListarCategorias.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                Categoria categoria;
+//                List<Categoria> categorias = catRepo.buscar(null);
+//                categorias.
+//                String[] cats = new String[categorias.size()];
+//
+//                Snackbar.make(v, cats.toString(), Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//                Log.i("LISTAR", "Categoria.size =" + categorias.size());
 
-                List<Categoria> categorias = catRepo.buscar(null);
-                Log.i("LISTAR", "Categoria.size =" + categorias.size());
-
-                for (Categoria c : categorias) {
-                    Log.i("LISTAR", c.toString());
-
-                }
             }
 
         });

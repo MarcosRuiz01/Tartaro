@@ -40,9 +40,8 @@ public class RegistroGeneral extends AppCompatActivity {
         rbtNormal = findViewById(R.id.rbt_normal);
 
 
-
         Button btnRegistrarUsuario = findViewById(R.id.btn_registrar);
-      btnRegistrarUsuario.setOnClickListener(new View.OnClickListener() {
+        btnRegistrarUsuario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -58,42 +57,46 @@ public class RegistroGeneral extends AppCompatActivity {
 
                 Intent LogIn = new Intent(RegistroGeneral.this, LogInGeneral.class);
 
-                if(!nombreUser.isEmpty()&&!emailUser.isEmpty()&&!p1.isEmpty()&&!p2.isEmpty()) {
+                if (!nombreUser.isEmpty() && !emailUser.isEmpty() && !p1.isEmpty() && !p2.isEmpty()) {
+
+                    if (userRepo.buscar(nombreUser) != null) {
 
 
-                if (p1.equals(p2)) {
+                        if (p1.equals(p2)) {
 
-                    if (rbtTecnico.isChecked()) {
+                            if (rbtTecnico.isChecked()) {
 
-                        tipoUsuario = TipoUsuario.TECNICO;
-                        usuario.setTipoUsuario(tipoUsuario);
-                        Log.i("REGISTRO USER NORMAL", usuario.toString());
-                        Toast.makeText(RegistroGeneral.this, "Registro TECNICO exitoso", Toast.LENGTH_SHORT).show();
+                                tipoUsuario = TipoUsuario.TECNICO;
+                                usuario.setTipoUsuario(tipoUsuario);
+                                Log.i("REGISTRO USER NORMAL", usuario.toString());
+                                Toast.makeText(RegistroGeneral.this, "Registro TECNICO exitoso", Toast.LENGTH_SHORT).show();
 
+                            } else {
+
+                                tipoUsuario = TipoUsuario.NORMAL;
+                                usuario.setTipoUsuario(tipoUsuario);
+                                Log.i("REGISTRO USER TECNICO", usuario.toString());
+                                Toast.makeText(RegistroGeneral.this, "Registro NORMAL exitoso", Toast.LENGTH_SHORT).show();
+
+                            }
+
+                            userRepo.guardar(usuario);
+                            startActivity(LogIn);
+
+
+                        } else {
+                            Toast.makeText(RegistroGeneral.this, "No se pudo confirmar las contraseñas, por favor intente denuevo", Toast.LENGTH_LONG).show();
+                        }
                     } else {
-
-                        tipoUsuario = TipoUsuario.NORMAL;
-                        usuario.setTipoUsuario(tipoUsuario);
-                        Log.i("REGISTRO USER TECNICO", usuario.toString());
-                        Toast.makeText(RegistroGeneral.this, "Registro NORMAL exitoso", Toast.LENGTH_SHORT).show();
-
-                    }
-
-                    userRepo.guardar(usuario);
-                    startActivity(LogIn);
-
-
-                } else {
-                    Toast.makeText(RegistroGeneral.this, "No se pudo confirmar las contraseñas, por favor intente denuevo", Toast.LENGTH_LONG).show();
+                        Toast.makeText(RegistroGeneral.this, "Este correo ya esta registrado", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     Toast.makeText(RegistroGeneral.this, "Debe llenar todos los campos", Toast.LENGTH_SHORT).show();
-                    }
+                }
             }
 
 
         });
-
 
 
         Button btnCancelarRegistro = findViewById(R.id.btn_cancelar);
@@ -106,10 +109,6 @@ public class RegistroGeneral extends AppCompatActivity {
             }
         });
 
-        //TODO: Hacer una comprobacion con el registro, donde no permita usar un usuario previamente registrado.
-
-
     }
-
 
 }
